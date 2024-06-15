@@ -38,6 +38,4 @@ Route::get('/login', [LoginController::class,'showLoginForm']);
 Route::post('/login', [LoginController::class,'login'])->name('login');
 Route::get('/logout', [LoginController::class,'logout']);
 Route::resource('emp', empController::class);
-Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
-   
-});
+
