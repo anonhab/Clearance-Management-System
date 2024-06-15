@@ -1,0 +1,51 @@
+Here is the web.php route file that defines the routes for the controllers:
+
+php
+
+Open In Editor
+Edit
+Copy code
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\BossController;
+use App\Http\Controllers\StakeholderController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ClearanceFormController;
+use App\Http\Controllers\ClearanceFormApprovalController;
+use App\Http\Controllers\EmployeeLocationController;
+use App\Http\Controllers\StakeholderLocationController;
+
+Route::resource('employees', EmployeeController::class);
+Route::resource('bosses', BossController::class);
+Route::resource('stakeholders', StakeholderController::class);
+Route::resource('locations', LocationController::class);
+Route::resource('clearanceForms', ClearanceFormController::class);
+Route::resource('clearanceFormApprovals', ClearanceFormApprovalController::class);
+Route::resource('employeeLocations', EmployeeLocationController::class);
+Route::resource('stakeholderLocations', StakeholderLocationController::class);
+
+Route::get('/', function () {
+    return view('welcome');
+});
+This file defines the following routes:
+
+employees resource route, handled by EmployeeController
+bosses resource route, handled by BossController
+stakeholders resource route, handled by StakeholderController
+locations resource route, handled by LocationController
+clearanceForms resource route, handled by ClearanceFormController
+clearanceFormApprovals resource route, handled by ClearanceFormApprovalController
+employeeLocations resource route, handled by EmployeeLocationController
+stakeholderLocations resource route, handled by StakeholderLocationController
+Each resource route defines the standard CRUD operations:
+
+GET /{resource} - index
+GET /{resource}/create - create
+POST /{resource} - store
+GET /{resource}/{id} - show
+GET /{resource}/{id}/edit - edit
+PUT /{resource}/{id} - update
+DELETE /{resource}/{id} - destroy
+Note that you may need to adjust the route names and controller methods to fit your specific application requirements.
