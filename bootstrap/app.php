@@ -16,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'ensure' => \App\Http\Middleware\EnsureUserIsAuthenticated::class,
         ]);
+        $middleware->alias([
+            'check' => \App\Http\Middleware\CheckEmployeeID::class,
+        ]);
     })
     ->withExceptions(function ($exceptions) {
         // Configure exception handling

@@ -10,7 +10,7 @@ class CheckEmployeeID
     public function handle($request, Closure $next)
     {
         // Check if the current request has a named route and it's not 'login'
-        if ($request->route() && $request->route()->getName() !== 'login' && !Auth::check()) {
+        if (!Auth::check()) {
             return redirect()->route('login')->withErrors(['message' => 'Please login to access this page.']);
         }
 

@@ -10,6 +10,11 @@
 <!-- partial:index.partial.html -->
 
 <div class="login-form">
+@if(session('success'))
+  <div class="alert alert-success">{{ session('success') }}</div>
+@elseif(session('message'))
+  <div class="alert alert-danger">{{ session('message') }}</div>
+@endif
   <div class="text">
     LOGIN
   </div>

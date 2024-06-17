@@ -37,5 +37,5 @@ Route::resource('stake', stakeController::class);
 Route::get('/login', [LoginController::class,'showLoginForm']);
 Route::post('/login', [LoginController::class,'login'])->name('login');
 Route::get('/logout', [LoginController::class,'logout']);
-Route::resource('emp', empController::class);
+Route::resource('emp', empController::class)->middleware('check'); 
 

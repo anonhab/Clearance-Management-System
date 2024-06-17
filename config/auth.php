@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+        'passwords' => 'users',  // Default password broker
     ],
 
     /*
@@ -38,8 +38,24 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users',  // Use the 'users' provider by default
         ],
+
+        'stakeholder' => [
+            'driver' => 'session',
+            'provider' => 'stakeholders',  // Use the 'stakeholders' provider for stakeholders
+        ],
+
+        'employee' => [
+            'driver' => 'session',
+            'provider' => 'employees',  // Use the 'employees' provider for employees
+        ],
+
+        'boss' => [
+            'driver' => 'session',
+            'provider' => 'bosses',  // Use the 'bosses' provider for bosses
+        ],
+
     ],
 
     /*
@@ -62,13 +78,23 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\User::class,  // Default user model
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'stakeholders' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Stakeholder::class,  // Model for stakeholders
+        ],
+
+        'employees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Employee::class,  // Model for employees
+        ],
+
+        'bosses' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Boss::class,  // Model for bosses
+        ],
     ],
 
     /*
@@ -93,7 +119,7 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
         ],
