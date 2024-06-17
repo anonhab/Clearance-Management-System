@@ -92,8 +92,6 @@
               <tr> 
                   <th>Stakeholder </th>
                   <th>Location </th>
-                  <th>Form ID  </th>
-                  <th>Form ID Status </th>
                   <th>Status</th>
               </tr>
           </thead>
@@ -109,8 +107,7 @@
                     <td>{{ $stakeholderName }}</td>
                     <td>{{ $locationName }}</td>
                     @foreach ($clearanceForms as $clearanceForm)
-                        <td>{{ $clearanceForm->ClearanceFormID }}</td>
-                        <td>{{ $clearanceForm->Status }}</td>
+                    
                         <td>
                             @foreach ($clearanceApprovals as $cp)
                                 @if ($cp->StakeholderLocationID == $stakeloc->StakeholderLocationID && $cp->ClearanceFormID == $clearanceForm->ClearanceFormID)
