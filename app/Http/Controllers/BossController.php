@@ -32,11 +32,11 @@ class BossController extends Controller
         return redirect()->route('bosses.index');
        } catch (QueryException $e) {
         if ($e->getCode() === '23000') {
-         
+
             $errorMessage = 'The email  already exists.';
             return redirect()->back()->with('error', $errorMessage);
         }
-    
+
         // Handle other possible exceptions
         return redirect()->back()->with('error', 'An unexpected error occurred.');
     }

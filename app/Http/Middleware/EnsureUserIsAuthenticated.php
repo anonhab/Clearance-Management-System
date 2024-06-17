@@ -12,7 +12,6 @@ class EnsureUserIsAuthenticated
         if (!Auth::check()) {
             return redirect('/login');
         }
-
         return $next($request);
     }
 }
