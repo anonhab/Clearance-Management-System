@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Http\Middleware\TrimStrings;
-use App\Http\Middleware\CheckEmployeeID; // Import your middleware class
+use App\Http\Middleware\CheckEmployeeID;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,10 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function ($middleware) {
         // Register middleware aliases
         $middleware->alias([
-            'ensure' => \App\Http\Middleware\EnsureUserIsAuthenticated::class,
-        ]);
-        $middleware->alias([
-            'check' => \App\Http\Middleware\CheckEmployeeID::class,
+            'stake' => \App\Http\Middleware\StakeholderMiddleware::class,
+            'boss' => \App\Http\Middleware\BossMiddleware::class,
+            'emp' => \App\Http\Middleware\EmployeeMiddleware::class,
         ]);
     })
     ->withExceptions(function ($exceptions) {
