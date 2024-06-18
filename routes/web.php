@@ -30,7 +30,7 @@ Route::middleware('admin')->group(function () {
     Route::resource('employeeLocations', EmployeeLocationController::class);
     Route::resource('stakeholderLocations', StakeholderLocationController::class);
     Route::resource('admin', AdminController::class);
-    Route::resource('/',admindash::class);
+    Route::resource('dashboard',admindash::class);
 });
 
 // Employee routes
