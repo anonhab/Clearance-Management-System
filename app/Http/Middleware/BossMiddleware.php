@@ -16,7 +16,7 @@ class BossMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && $request->session()->has('boss_id')) {
+        if ($request->session()->has('boss_id')) {
             return $next($request);
         }
 

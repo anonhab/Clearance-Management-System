@@ -16,7 +16,7 @@ class StakeholderMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && $request->session()->has('stakeholder_id')) {
+        if ($request->session()->has('stakeholder_id')) {
             return $next($request);
         }
 

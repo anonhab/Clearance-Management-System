@@ -18,10 +18,6 @@ class EmployeeMiddleware
     {
         if ($request->session()->has('employee_id')) {
             return $next($request);
-        } else if ($request->session()->has('boss_id')) {
-            return $next($request);
-        } else  if ($request->session()->has('stakeholder_id')) {
-            return $next($request);
         }
         return redirect()->route('login')->withErrors('Unauthorized access.');
     }
