@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'stake' => \App\Http\Middleware\StakeholderMiddleware::class,
             'boss' => \App\Http\Middleware\BossMiddleware::class,
             'emp' => \App\Http\Middleware\EmployeeMiddleware::class,
+            'admin'=>\App\Http\Middleware\AdminMiddleware::class,
         ]);
     })
     ->withExceptions(function ($exceptions) {

@@ -7,7 +7,7 @@
         </span>
         <div class="text logo-text">
           <span class="name">habtamu bitew </span>
-          <span class="profession">Admin</span>
+          <span class="profession">Admin {{ session('admin_id') }}</span>
         </div>
       </div>
       <i class='bx bx-chevron-right toggle'></i>
@@ -67,7 +67,7 @@
       </div>
       <div class="bottom-content">
         <li class="">
-          <a href="#">
+          <a href="{{url('logout')}}">
             <i class='bx bx-log-out icon'></i>
             <span class="text nav-text">Logout</span>
           </a>

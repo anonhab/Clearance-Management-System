@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Employee;
 use App\Models\StakeholderLocation;
 use App\Models\Boss;
+use App\Models\Admin;
 
 class LoginController extends Controller
 {
@@ -19,23 +20,23 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only(['email', 'password']);
-    
+        
         $employee = Employee::where('email', $credentials['email'])->first();
-    
-        if ($employee && Hash::check($credentials['password'], $employee->Password)) {
+        
+        if ($employee && Hash::check($credentials['password'], $employee->password)) {
             Auth::login($employee);
             $request->session()->put('employee_id', $employee->EmployeeID);
             return redirect()->intended('/emp');
         }
-
+        
         $boss = Boss::where('email', $credentials['email'])->first();
         
-        if ($boss && Hash::check($credentials['password'], $boss->Password)) {
+        if ($boss && Hash::check($credentials['password'], $boss->password)) {
             Auth::login($boss);
             $request->session()->put('boss_id', $boss->BossID);
             return redirect()->intended('/boss');
         }
-
+        
         $stakeholder = StakeholderLocation::where('Email', $credentials['email'])->first();
         
         if ($stakeholder && Hash::check($credentials['password'], $stakeholder->Password)) {
@@ -44,14 +45,22 @@ class LoginController extends Controller
             $request->session()->put('stakeholderlocation_id', $stakeholder->StakeholderLocationID);
             return redirect()->intended('/stake');
         }
-    
+        
+        $admin = Admin::where('email', $credentials['email'])->first();
+        
+        if ($admin && Hash::check($credentials['password'], $admin->password)) {
+            Auth::login($admin);
+            $request->session()->put('admin_id', $admin->id);
+            return redirect()->intended('/admin');
+        }
+        
         return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
-        $request->session()->forget(['employee_id', 'boss_id', 'stakeholder_id', 'stakeholderlocation_id']);
+        $request->session()->forget(['employee_id', 'boss_id', 'stakeholder_id', 'stakeholderlocation_id', 'admin_id']);
         return redirect()->route('login');
     }
 }
