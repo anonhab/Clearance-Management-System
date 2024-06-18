@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\admindash;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\BossController;
 use App\Http\Controllers\bossmanController;
@@ -29,6 +30,7 @@ Route::middleware('admin')->group(function () {
     Route::resource('employeeLocations', EmployeeLocationController::class);
     Route::resource('stakeholderLocations', StakeholderLocationController::class);
     Route::resource('admin', AdminController::class);
+    Route::resource('/',admindash::class);
 });
 
 // Employee routes
