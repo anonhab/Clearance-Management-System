@@ -60,7 +60,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        $request->session()->forget(['employee_id', 'boss_id', 'stakeholder_id', 'stakeholderlocation_id']);
+        $request->session()->forget(['employee_id', 'boss_id', 'stakeholder_id', 'stakeholderlocation_id','admin_id']);
         return redirect()->route('login');
     }
 }

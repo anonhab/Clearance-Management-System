@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\Employee;
+use App\Models\ClearanceForm;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 class EmployeeController extends Controller
@@ -20,6 +21,11 @@ class EmployeeController extends Controller
     {
         $employees = Employee::all();
         return view('home', compact('employees'));
+    }
+    public function showinfo(Request $request){
+        $employeeId = $request->session()->get('employee_id');
+        $clearanceForm = ClearanceForm::where('EmployeeID', $employeeId)->get();
+        return view('employees.requirement', compact('clearanceForm'));
     }
 
     public function request()

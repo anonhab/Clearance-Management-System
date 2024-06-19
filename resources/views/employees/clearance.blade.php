@@ -43,12 +43,6 @@
         <li class="nav-link">
           <a href="#">
             <i class='bx bx-home-alt icon'></i>
-            <span class="text nav-text">Requirements</span>
-          </a>
-        </li>
-        <li class="nav-link">
-          <a href="#">
-            <i class='bx bx-home-alt icon'></i>
             <span class="text nav-text">Help</span>
           </a>
         </li>

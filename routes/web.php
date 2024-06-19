@@ -24,9 +24,6 @@ Route::middleware('admin')->group(function () {
     Route::resource('bosses', BossController::class);
     Route::resource('stakeholders', StakeholderController::class);
     Route::resource('locations', LocationController::class);
-    Route::resource('clearanceForms', ClearanceFormController::class);
-    Route::resource('cleanapp_update', cleanappController::class);
-    Route::resource('clearanceFormApprovals', ClearanceFormApprovalController::class);
     Route::resource('employeeLocations', EmployeeLocationController::class);
     Route::resource('stakeholderLocations', StakeholderLocationController::class);
     Route::resource('admin', AdminController::class);
@@ -37,6 +34,7 @@ Route::middleware('admin')->group(function () {
 Route::middleware('emp')->group(function () {
     Route::resource('emp', empController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
     Route::get('/clearance', [empController::class, 'clearance']);
+   
 });
 
 // Boss routes
@@ -50,8 +48,13 @@ Route::middleware('stake')->group(function () {
     Route::resource('clean_update', CleanUpdateController::class);
    
 });
+Route::resource('clearanceFormApprovals', ClearanceFormApprovalController::class);
+Route::resource('clearanceForms', ClearanceFormController::class);
 Route::resource('employees', EmployeeController::class)->only(['index', 'show']);
+    
+Route::resource('cleanapp_update', cleanappController::class);
 // Authentication routes
 Route::get('/login', [LoginController::class, 'showLoginForm']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/clearance-info', [EmployeeController::class, 'showinfo']);

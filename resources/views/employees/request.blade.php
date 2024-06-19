@@ -50,7 +50,7 @@
           @endif
           @endforeach
           <li class="nav-link">
-            <a href="#">
+            <a href="{{url('clearance-info')}}">
               <i class='bx bx-home-alt icon'></i>
               <span class="text nav-text">Requirements</span>
             </a>
