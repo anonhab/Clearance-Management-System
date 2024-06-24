@@ -20,4 +20,71 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./dstyle.css" />
+    <style>
+            .conprofile {
+                padding-top: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background-color: #f4f4f4;
+            }
+            .profile-box {
+                background-color: #ffffff;
+                border: 1px solid #e0e0e0;
+                border-radius: 20px;
+                padding: 40px;
+                max-width: 800px;
+                width: 100%;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            .pimg {
+                width: 150px;
+                height: 150px;
+                border: 2px solid #e0e0e0;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 20px;
+            }
+            .profile-info {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                grid-gap: 10px 20px;
+                align-items: center;
+                font-family: 'Arial', sans-serif;
+                color: #333;
+            }
+            .profile-info h3 {
+                font-size: 18px;
+                font-weight: bold;
+                margin: 0;
+            }
+            .profile-info .value {
+                font-size: 18px;
+                font-weight: normal;
+                margin: 0;
+                color: #555;
+                text-transform: capitalize;
+            }
+            .upbtn {
+                background-color: #4CAF50;
+                color: white;
+                font-size: 20px;
+                border: 2px solid #4CAF50;
+                padding: 10px 25px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                border-radius: 25px;
+                cursor: pointer;
+                transition: background-color 0.3s, color 0.3s;
+            }
+            .upbtn:hover {
+                background-color: white;
+                color: #4CAF50;
+            }
+            .center {
+                text-align: center;
+            }
+        </style>
 </head>

@@ -1,104 +1,113 @@
 @include('partials.header')
-<head> <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f6f6f9;
-            color: #677483;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            max-width: 800px;
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #7380ec;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .info-section {
-            margin-top: 30px;
-        }
-        h2 {
-            font-size: 1.5rem;
-            color: #111e88;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-    </style></head>
+
+<head>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f6f6f9;
+      color: #677483;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #7380ec;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .info-section {
+      margin-top: 30px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #111e88;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
 <body>
-<nav class="sidebar close">
-  <header>
-    <div class="image-text">
-      <span class="image">
-        <img src="su/v.png" alt="">
-      </span>
-      <div class="text logo-text">
-        <span class="name">habtamu bitew</span>
-        <span class="profession">Employee {{ session('employee_id') }}</span>
+  <nav class="sidebar close">
+    <header>
+      <div class="image-text">
+        <span class="image">
+          <img src="su/v.png" alt="">
+        </span>
+        <div class="text logo-text">
+          <span class="name">habtamu bitew</span>
+          <span class="profession">Employee {{ session('employee_id') }}</span>
+        </div>
+      </div>
+      <i class='material-icons toggle'>chevron_right</i>
+    </header>
+    <div class="menu-bar">
+      <div class="menu">
+        <ul class="menu-links">
+          <li class="nav-link">
+            <a href="#">
+              <i class='material-icons icon'>home</i>
+              <span class="text nav-text">Home</span>
+            </a>
+          </li>
+          <li class="nav-link">
+            <a href="{{url('profile')}}">
+              <i class='material-icons icon'>account_circle</i>
+              <span class="text nav-text">My profile</span>
+            </a>
+          </li>
+          <li class="nav-link">
+            <a href="{{url('emp')}}">
+              <i class='material-icons icon'>assignment</i>
+              <span class="text nav-text">Request Form</span>
+            </a>
+          </li>
+          <li class="nav-link">
+            <a href="{{url('clearance')}}">
+              <i class='material-icons icon'>check_circle</i>
+              <span class="text nav-text">My Clearance</span>
+            </a>
+          </li>
+          <li class="nav-link">
+            <a href="{{url('clearance-info')}}">
+              <i class='material-icons icon'>info</i>
+              <span class="text nav-text">Requirements</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+      <div class="bottom-content">
+        <li class="">
+          <a href="{{url('/logout')}}">
+            <i class='material-icons icon'>logout</i>
+            <span class="text nav-text">Logout</span>
+          </a>
+        </li>
       </div>
     </div>
-    <i class='material-icons toggle'>chevron_right</i>
-  </header>
-  <div class="menu-bar">
-    <div class="menu">
-      <ul class="menu-links">
-        <li class="nav-link">
-          <a href="#">
-            <i class='material-icons icon'>home</i>
-            <span class="text nav-text">Home</span>
-          </a>
-        </li>
-        <li class="nav-link">
-          <a href="#">
-            <i class='material-icons icon'>account_circle</i>
-            <span class="text nav-text">My profile</span>
-          </a>
-        </li>
-        <li class="nav-link">
-          <a href="{{url('emp')}}">
-            <i class='material-icons icon'>assignment</i>
-            <span class="text nav-text">Request Form</span>
-          </a>
-        </li>
-        <li class="nav-link">
-          <a href="{{url('clearance')}}">
-            <i class='material-icons icon'>check_circle</i>
-            <span class="text nav-text">My Clearance</span>
-          </a>
-        </li>
-        <li class="nav-link">
-          <a href="{{url('clearance-info')}}">
-            <i class='material-icons icon'>info</i>
-            <span class="text nav-text">Requirements</span>
-          </a>
-        </li>
-        
-      </ul>
-    </div>
-    <div class="bottom-content">
-      <li class="">
-        <a href="{{url('/logout')}}">
-          <i class='material-icons icon'>logout</i>
-          <span class="text nav-text">Logout</span>
-        </a>
-      </li>
-    </div>
-  </div>
-</nav>
+  </nav>
 
   <section class="home">
     <div class="container">

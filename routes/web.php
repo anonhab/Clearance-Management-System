@@ -48,6 +48,8 @@ Route::middleware('stake')->group(function () {
     Route::resource('stake', stakeController::class);
     
 });
+Route::get('/profile', [empController::class, 'profile']);
+Route::post('change-password', [empController::class, 'changePassword'])->name('changepassword');
 Route::resource('employees', EmployeeController::class)->only(['index', 'show']);
 Route::resource('clean_update', CleanUpdateController::class); 
 Route::resource('clearanceFormApprovals', ClearanceFormApprovalController::class);

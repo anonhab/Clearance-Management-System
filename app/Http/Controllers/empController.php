@@ -10,6 +10,8 @@ use App\Models\Location;
 use App\Models\StakeholderLocation;
 use App\Models\ClearanceFormApproval;
 use App\Models\Stakeholder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class empController extends Controller
 
@@ -32,6 +34,38 @@ class empController extends Controller
     {
         $employees = Employee::all();
         return view('employees.clearance', compact('employees'));
+    }
+    public function  profile(Request $request)
+    {
+
+        $employeeId = $request->session()->get('employee_id');
+        $employees = Employee::findOrFail($employeeId);
+        $clearanceForm = ClearanceForm::where('EmployeeID', $employeeId)
+            ->where('Status', 'APPROVED')
+            ->get();
+        return view('employees.profile', compact('employees', 'clearanceForm'));
+    }
+    public function changePassword(Request $request)
+    {
+        // $validator = Validator::make($request->all(), [
+        //     'current_password' => 'required',
+        //     'new_password' => 'required|min:8|confirmed',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return back()->withErrors($validator)->withInput()->with('modal', 'changePasswordModal');
+        // }
+
+        $employeeId = $request->session()->get('employee_id');
+        $employee = Employee::findOrFail($employeeId);
+        if (!Hash::check($request->current_password, $employee->Password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect'])->withInput();
+        }
+
+        $employee->Password = Hash::make($request->new_password);
+        $employee->save();
+
+        return back()->with('success', 'Password changed successfully');
     }
     public function clearance(Request $request)
     {
