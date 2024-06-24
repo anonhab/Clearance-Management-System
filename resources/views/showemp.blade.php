@@ -38,31 +38,8 @@
     }
     
     /* Navigation styles */
-    nav {
-        background-color: #333;
-        padding: 10px 0;
-    }
-    
-    nav ul {
-        list-style: none;
-        text-align: center;
-    }
-    
-    nav ul li {
-        display: inline;
-        margin-right: 20px;
-    }
-    
-    nav ul li a {
-        text-decoration: none;
-        color: #fff;
-        font-weight: bold;
-        transition: color 0.3s ease;
-    }
-    
-    nav ul li a:hover {
-        color: #4CAF50;
-    }
+  
+
     
     /* Main content styles */
     .main-content {
@@ -133,14 +110,6 @@
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="{{url('boss')}}">Home</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <section class="main-content">
         <div class="container">
             @if ($employee)
@@ -163,11 +132,5 @@
         </div>
     </section>
     
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 . All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>

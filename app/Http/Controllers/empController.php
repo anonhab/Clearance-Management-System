@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,37 +10,32 @@ use App\Models\Location;
 use App\Models\StakeholderLocation;
 use App\Models\ClearanceFormApproval;
 use App\Models\Stakeholder;
+
 class empController extends Controller
 
 {
-    
     public function index(Request $request)
     {
         // Retrieve the employee_id from the session
         $employeeId = $request->session()->get('employee_id');
-        
+
         // Find the employee by the given ID from the session
         $employees = Employee::where('EmployeeID', $employeeId)->get();
-    
+
         // Get all bosses and clearance forms as before
         $bosses = Boss::all();
         $clearanceForm = ClearanceForm::where('EmployeeID', $employeeId)->get();
-        
-    
         // Return the view with the retrieved data
         return view('employees.request', compact('employees', 'bosses', 'clearanceForm'));
     }
-    
     public function home()
     {
         $employees = Employee::all();
         return view('employees.clearance', compact('employees'));
     }
-    
     public function clearance(Request $request)
     {
         $employeeId = $request->session()->get('employee_id');
-    
         $locations = Location::all();
         $employees = Employee::all();
         $stakeholders = Stakeholder::all();
@@ -48,7 +44,7 @@ class empController extends Controller
             ->where('Status', 'APPROVED')
             ->get();
         $clearanceApprovals = ClearanceFormApproval::whereIn('ClearanceFormID', $clearanceForms->pluck('ClearanceFormID'))->get();
-    
+
         return view('employees.clearance', compact(
             'employees',
             'locations',
@@ -58,7 +54,7 @@ class empController extends Controller
             'clearanceApprovals'
         ));
     }
-    
+
     public function request()
     {
         $employees = Employee::all();
@@ -106,7 +102,6 @@ class empController extends Controller
         $employee->save();
         return redirect()->route('employees.index');
     }
-
     public function destroy(Employee $employee)
     {
         $employee->delete();

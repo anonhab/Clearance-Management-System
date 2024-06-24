@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Clearance Form</title>
-   <style> /* Reset styles */
+     <style> /* Reset styles */
     * {
         margin: 0;
         padding: 0;
@@ -27,7 +27,7 @@
     
     /* Header styles */
     header {
-        background-color: #000000;
+        background-color: #4CAF50;
         color: #fff;
         padding: 20px 0;
         text-align: center;
@@ -38,31 +38,8 @@
     }
     
     /* Navigation styles */
-    nav {
-        background-color: #534747;
-        padding: 10px 0;
-    }
-    
-    nav ul {
-        list-style: none;
-        text-align: center;
-    }
-    
-    nav ul li {
-        display: inline;
-        margin-right: 20px;
-    }
-    
-    nav ul li a {
-        text-decoration: none;
-        color: #fff;
-        font-weight: bold;
-        transition: color 0.3s ease;
-    }
-    
-    nav ul li a:hover {
-        color: #4CAF50;
-    }
+  
+
     
     /* Main content styles */
     .main-content {
@@ -129,17 +106,9 @@
 <body>
     <header>
         <div class="container">
-            <h1>About Employee</h1>
+            <h1>About Clearance Form</h1>
         </div>
     </header>
-
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="{{url('boss')}}">Home</a></li>
-            </ul>
-        </div>
-    </nav>
 
     <section class="main-content">
          
@@ -152,9 +121,8 @@
                     <li><strong>Employee ID number:</strong> {{ $clearanceForm->EmployeeID }} <a href="{{ route('employees.show', $clearanceForm->EmployeeID) }}">View</a></li>
                     <li><strong>Boss ID:</strong> {{ $clearanceForm->BossID }}</li>
                     <li><strong>Leaving case:</strong> {{ $clearanceForm->Leaving_case }}</li>
-                    <li><strong>Requested Date:</strong> {{ $clearanceForm->RequestDate }}</li>
+                    <li><strong>Requested Date:</strong> {{ $clearanceForm->created_at}}</li>
                     <li><strong>Satus:</strong> {{ $clearanceForm->Status }}</li>
-                    <li><strong>Registered date:</strong> {{ $clearanceForm->created_at }}</li>
                 </ul>
             </div>
             @else
@@ -163,11 +131,5 @@
         </div>
     </section>
     
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024    . All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>

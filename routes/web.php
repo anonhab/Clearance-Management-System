@@ -22,6 +22,7 @@ use App\Http\Controllers\stakeController;
 Route::middleware('admin')->group(function () {
     Route::resource('employees', EmployeeController::class);
     Route::resource('bosses', BossController::class);
+    Route::resource('employees', EmployeeController::class);
     Route::resource('stakeholders', StakeholderController::class);
     Route::resource('locations', LocationController::class);
     Route::resource('employeeLocations', EmployeeLocationController::class);
@@ -45,13 +46,12 @@ Route::middleware('boss')->group(function () {
 // Stakeholder routes
 Route::middleware('stake')->group(function () {
     Route::resource('stake', stakeController::class);
-    Route::resource('clean_update', CleanUpdateController::class);
-   
+    
 });
+Route::resource('employees', EmployeeController::class)->only(['index', 'show']);
+Route::resource('clean_update', CleanUpdateController::class); 
 Route::resource('clearanceFormApprovals', ClearanceFormApprovalController::class);
 Route::resource('clearanceForms', ClearanceFormController::class);
-Route::resource('employees', EmployeeController::class)->only(['index', 'show']);
-    
 Route::resource('cleanapp_update', cleanappController::class);
 // Authentication routes
 Route::get('/login', [LoginController::class, 'showLoginForm']);

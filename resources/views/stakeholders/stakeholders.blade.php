@@ -15,43 +15,38 @@
             <i class='bx bx-chevron-right toggle'></i>
         </header>
         <div class="menu-bar">
-            <div class="menu">
-                <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-home-alt icon'></i>
-                            <span class="text nav-text">Home</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-home-alt icon'></i>
-                            <span class="text nav-text">My profile</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{url('stake')}}">
-                            <i class='bx bx-home-alt icon'></i>
-                            <span class="text nav-text">Requested Form</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-home-alt icon'></i>
-                            <span class="text nav-text">Help</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="bottom-content">
-                <li class="">
-                    <a href="{{url('/logout')}}">
-                        <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Logout</span>
-                    </a>
-                </li>
-            </div>
-        </div>
+    <div class="menu">
+      <ul class="menu-links">
+        <li class="nav-link">
+          <a href="#">
+            <i class='material-icons icon'>home</i>
+            <span class="text nav-text">Home</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="#">
+            <i class='material-icons icon'>account_circle</i>
+            <span class="text nav-text">My profile</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="{{url('stake')}}">
+            <i class='material-icons icon'>assignment</i>
+            <span class="text nav-text">Requested Form</span>
+          </a>
+        </li>
+       
+      </ul>
+    </div>
+    <div class="bottom-content">
+      <li class="">
+        <a href="{{url('/logout')}}">
+          <i class='material-icons icon'>logout</i>
+          <span class="text nav-text">Logout</span>
+        </a>
+      </li>
+    </div>
+  </div>
     </nav>
     <section class="home">
         @if(session('success'))

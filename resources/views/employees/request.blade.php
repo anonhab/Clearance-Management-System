@@ -1,78 +1,71 @@
 @include('partials.header')
 
 <body>
-  <nav class="sidebar close">
-    <header>
-      <div class="image-text">
-        <span class="image">
-          <img src="su/v.png" alt="">
+<nav class="sidebar close">
+  <header>
+    <div class="image-text">
+      <span class="image">
+        <img src="su/v.png" alt="">
+      </span>
+      <div class="text logo-text">
+        <span class="name">habtamu bitew</span>
+        <span class="profession">
+          Employee {{ session('employee_id') }}
         </span>
-        <div class="text logo-text">
-          <span class="name">habtamu bitew</span>
-          <span class="profession">
-            Employee {{ session('employee_id') }}
-          </span>
-        </div>
-
-      </div>
-      <i class='bx bx-chevron-right toggle'></i>
-    </header>
-    <div class="menu-bar">
-      <div class="menu">
-        <ul class="menu-links">
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-home-alt icon'></i>
-              <span class="text nav-text">Home</span>
-            </a>
-          </li>
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-home-alt icon'></i>
-              <span class="text nav-text">My profile</span>
-            </a>
-          </li>
-          <li class="nav-link">
-            <a href="{{url('emp')}}">
-              <i class='bx bx-home-alt icon'></i>
-              <span class="text nav-text">Request Form</span>
-            </a>
-          </li>
-          @foreach($clearanceForm as $cl)
-
-          @if($cl->Status=="Approved")
-          <li class="nav-link">
-            <a href="{{url('clearance')}}">
-              <i class='bx bx-home-alt icon'></i>
-              <span class="text nav-text">My Clearance</span>
-            </a>
-          </li>
-          @endif
-          @endforeach
-          <li class="nav-link">
-            <a href="{{url('clearance-info')}}">
-              <i class='bx bx-home-alt icon'></i>
-              <span class="text nav-text">Requirements</span>
-            </a>
-          </li>
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-home-alt icon'></i>
-              <span class="text nav-text">Help</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="bottom-content">
-        <li class="">
-          <a href="{{url('/logout')}}">
-            <i class='bx bx-log-out icon'></i>
-            <span class="text nav-text">Logout</span>
-          </a>
-        </li>
       </div>
     </div>
-  </nav>
+    <i class='material-icons toggle'>chevron_right</i>
+  </header>
+  <div class="menu-bar">
+    <div class="menu">
+      <ul class="menu-links">
+        <li class="nav-link">
+          <a href="#">
+            <i class='material-icons icon'>home</i>
+            <span class="text nav-text">Home</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="#">
+            <i class='material-icons icon'>account_circle</i>
+            <span class="text nav-text">My profile</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="{{url('emp')}}">
+            <i class='material-icons icon'>assignment</i>
+            <span class="text nav-text">Request Form</span>
+          </a>
+        </li>
+        @foreach($clearanceForm as $cl)
+          @if($cl->Status=="Approved")
+            <li class="nav-link">
+              <a href="{{url('clearance')}}">
+                <i class='material-icons icon'>check_circle</i>
+                <span class="text nav-text">My Clearance</span>
+              </a>
+            </li>
+          @endif
+        @endforeach
+        <li class="nav-link">
+          <a href="{{url('clearance-info')}}">
+            <i class='material-icons icon'>info</i>
+            <span class="text nav-text">Requirements</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="bottom-content">
+      <li class="">
+        <a href="{{url('/logout')}}">
+          <i class='material-icons icon'>logout</i>
+          <span class="text nav-text">Logout</span>
+        </a>
+      </li>
+    </div>
+  </div>
+</nav>
+
   <div id="addEmployeeModal" class="modal  fade">
     <div class="modal-dialog">
       <div class="modal-content">

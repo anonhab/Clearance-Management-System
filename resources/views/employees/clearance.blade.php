@@ -1,6 +1,5 @@
 @include('partials.header')
 <body>
-  
 <nav class="sidebar close">
   <header>
     <div class="image-text">
@@ -92,6 +91,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                  @php
+                  $count =0;
+                  $stakecount=0;
+                  @endphp
                     @foreach ($stakeholderLocations as $stakeloc)
                         <tr>
                             @php
@@ -99,6 +102,7 @@
                                 $location = $locations->firstWhere('LocationID', $stakeloc->LocationID);
                                 $stakeholderName = $stakeholder ? $stakeholder->Workdep : '';
                                 $locationName = $location ? $location->LocationName : '';
+                                $stakecount=$stakecount+1;
                             @endphp
                             <td>{{ $stakeholderName }}</td>
                             <td>{{ $locationName }}</td>
@@ -110,6 +114,9 @@
                                                 @case('Approved')
                                                     <button class="btn btn-success btn-sm">
                                                         <span>{{ $cp->ApprovalStatus }}</span>
+                                                        @php
+                                                        $count = $count + 1;
+                                                        @endphp
                                                     </button>
                                                     @break
                                                 @case('Denied')
@@ -135,7 +142,14 @@
                     @endforeach
                 </tbody>
             </table>
+           
         </div>
+        @if($count==$stakecount)
+        <div class="btn" class="text nav-text" ><button class="btn btn-success btn-sm"><b>Get Certificate</b></button></div>
+        @endif
+        @if($count!=$stakecount)
+        <div class="btn" class="text nav-text" ><button class="btn btn-warning btn-sm"><b>Waiting for Generate Certificate </b></button></div>
+        @endif
     </div>
 </section>
 
