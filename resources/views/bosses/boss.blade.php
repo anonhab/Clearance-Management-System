@@ -23,7 +23,7 @@
           </a>
         </li>
         <li class="nav-link">
-          <a href="#">
+          <a href="{{url('bossprofile')}}">
             <i class='material-icons icon'>account_circle</i>
             <span class="text nav-text">My profile</span>
           </a>

@@ -28,30 +28,31 @@ Route::middleware('admin')->group(function () {
     Route::resource('employeeLocations', EmployeeLocationController::class);
     Route::resource('stakeholderLocations', StakeholderLocationController::class);
     Route::resource('admin', AdminController::class);
-    Route::resource('dashboard',admindash::class);
+    Route::resource('dashboard', admindash::class);
 });
 
 // Employee routes
 Route::middleware('emp')->group(function () {
     Route::resource('emp', empController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
     Route::get('/clearance', [empController::class, 'clearance']);
-   
+    Route::get('/profile', [empController::class, 'profile']);
+    Route::post('change-password', [empController::class, 'changePassword'])->name('changepassword');
 });
 
 // Boss routes
 Route::middleware('boss')->group(function () {
     Route::resource('boss', bossmanController::class);
+    Route::get('/bossprofile', [bossmanController::class, 'profile']);
+    Route::post('boss_change-password', [bossmanController::class, 'changePassword'])->name('bosschangepassword');
 });
 
 // Stakeholder routes
 Route::middleware('stake')->group(function () {
     Route::resource('stake', stakeController::class);
-    
 });
-Route::get('/profile', [empController::class, 'profile']);
-Route::post('change-password', [empController::class, 'changePassword'])->name('changepassword');
+
 Route::resource('employees', EmployeeController::class)->only(['index', 'show']);
-Route::resource('clean_update', CleanUpdateController::class); 
+Route::resource('clean_update', CleanUpdateController::class);
 Route::resource('clearanceFormApprovals', ClearanceFormApprovalController::class);
 Route::resource('clearanceForms', ClearanceFormController::class);
 Route::resource('cleanapp_update', cleanappController::class);

@@ -6,6 +6,8 @@ use App\Models\Employee;
 use App\Models\Boss;
 use App\Models\ClearanceForm;
 use App\Models\Location;
+use Illuminate\Support\Facades\Hash;
+
 class bossmanController extends Controller
 
 {
@@ -23,7 +25,35 @@ class bossmanController extends Controller
         $employees = Employee::all();
         return view('employees.clearance', compact('employees'));
     }
-    
+    public function  profile(Request $request)
+    {
+
+        $bossId = $request->session()->get('boss_id');
+        $boss = Boss::findOrFail($bossId);
+        return view('bosses.profile', compact('boss'));
+    }
+    public function changePassword(Request $request)
+    {
+        // $validator = Validator::make($request->all(), [
+        //     'current_password' => 'required',
+        //     'new_password' => 'required|min:8|confirmed',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return back()->withErrors($validator)->withInput()->with('modal', 'changePasswordModal');
+        // }
+
+        $bossId = $request->session()->get('boss_id');
+        $boss = Boss::findOrFail($bossId);
+        if (!Hash::check($request->current_password, $boss->Password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect'])->withInput();
+        }
+
+        $boss->Password = Hash::make($request->new_password);
+        $boss->save();
+
+        return back()->with('success', 'Password changed successfully');
+    }
     public function clearance()
     {
         $location = Location::all();
