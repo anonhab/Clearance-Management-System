@@ -27,7 +27,7 @@
                 justify-content: center;
                 align-items: center;
                 min-height: 100vh;
-                background-color: #f4f4f4;
+                background-color: #e4e9f7;
             }
             .profile-box {
                 background-color: #ffffff;
