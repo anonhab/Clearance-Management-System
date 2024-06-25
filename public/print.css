@@ -100,6 +100,7 @@ body {
     table th,
     table td {
         text-align: right;
+        padding: 8px;
     }
     h1,
     h4,
