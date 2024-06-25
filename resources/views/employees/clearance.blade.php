@@ -142,10 +142,9 @@
                     @endforeach
                 </tbody>
             </table>
-           
         </div>
         @if($count==$stakecount)
-        <div class="btn" class="text nav-text" ><button class="btn btn-success btn-sm"><b>Get Certificate</b></button></div>
+        <div class="btn" class="text nav-text" ><button class="btn btn-success btn-sm"> <a href="{{url('print')}}"> <b>Get Certificate</b></a></button></div>
         @endif
         @if($count!=$stakecount)
         <div class="btn" class="text nav-text" ><button class="btn btn-warning btn-sm"><b>Waiting for Generate Certificate </b></button></div>

@@ -35,6 +35,7 @@ Route::middleware('admin')->group(function () {
 Route::middleware('emp')->group(function () {
     Route::resource('emp', empController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
     Route::get('/clearance', [empController::class, 'clearance']);
+    Route::get('/print', [empController::class, 'print']);
     Route::get('/profile', [empController::class, 'profile']);
     Route::post('change-password', [empController::class, 'changePassword'])->name('changepassword');
 });

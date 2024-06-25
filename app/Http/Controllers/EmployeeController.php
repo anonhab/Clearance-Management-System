@@ -60,7 +60,6 @@ public function store(Request $request)
         $errorMessage = 'The email  already exists.';
         return redirect()->back()->with('error', $errorMessage);
     }
-
     // Handle other possible exceptions
     return redirect()->back()->with('error', 'An unexpected error occurred.');
 }

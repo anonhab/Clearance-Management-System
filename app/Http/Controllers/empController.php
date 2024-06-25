@@ -88,7 +88,30 @@ class empController extends Controller
             'clearanceApprovals'
         ));
     }
+    public function print(Request $request){
+        $employeeId = $request->session()->get('employee_id');
+        $locations = Location::all();
+        $employees = Employee::findOrFail($employeeId);
+        $stakeholders = Stakeholder::all();
+        $stakeholderLocations = StakeholderLocation::all();
+        $clearanceForms = ClearanceForm::where('EmployeeID', $employeeId)
+            ->where('Status', 'APPROVED')
+            ->get();
+        
+        $bossname = Boss::all();
+        
+        $clearanceApprovals = ClearanceFormApproval::whereIn('ClearanceFormID', $clearanceForms->pluck('ClearanceFormID'))->get();
 
+        return view('employees.print', compact(
+            'employees',
+            'locations',
+            'stakeholders',
+            'stakeholderLocations',
+            'clearanceForms',
+            'clearanceApprovals',
+            'bossname'
+        ));
+    }
     public function request()
     {
         $employees = Employee::all();
