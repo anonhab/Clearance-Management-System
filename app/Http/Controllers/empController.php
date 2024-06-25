@@ -111,7 +111,7 @@ class empController extends Controller
         $employee->email = $request->input('email');
         $employee->Password = $request->input('Password');
         $employee->save();
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.index')->with('success', 'Employee added successfully');
     }
 
     public function show(Employee $employee)

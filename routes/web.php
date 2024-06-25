@@ -49,6 +49,8 @@ Route::middleware('boss')->group(function () {
 // Stakeholder routes
 Route::middleware('stake')->group(function () {
     Route::resource('stake', stakeController::class);
+    Route::get('/stakeprofile', [stakeController::class, 'profile']);
+    Route::post('stake_change-password', [stakeController::class, 'changePassword'])->name('stakechangepassword');
 });
 
 Route::resource('employees', EmployeeController::class)->only(['index', 'show']);

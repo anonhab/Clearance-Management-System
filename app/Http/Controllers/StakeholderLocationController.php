@@ -32,7 +32,7 @@ class StakeholderLocationController extends Controller
             $stakeholderLocation->Email = $request->input('email');
             $stakeholderLocation->Password =  Hash::make($request->input('Password'));
             $stakeholderLocation->save();
-            return redirect()->route('stakeholderLocations.index');
+            return redirect()->route('stakeholderLocations.index')->with('success', 'stakeholder location add successfully');
         } catch (QueryException $e) {
             if ($e->getCode() === '23000') {
              
@@ -60,7 +60,7 @@ class StakeholderLocationController extends Controller
         $stakeholderLocation->StakeholderID = $request->input('StakeholderID');
         $stakeholderLocation->LocationID = $request->input('LocationID');
         $stakeholderLocation->save();
-        return redirect()->route('stakeholderLocations.index');
+        return redirect()->route('stakeholderLocations.index')->with('success', 'stakeholder location updated successfully');
     }
 
     public function destroy(StakeholderLocation $stakeholderLocation)

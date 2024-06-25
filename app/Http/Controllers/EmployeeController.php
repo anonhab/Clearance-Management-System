@@ -53,7 +53,7 @@ public function store(Request $request)
     $employee->Password = Hash::make($request->input('Password'));
     $employee->save();
 
-    return redirect()->route('employees.index');
+    return redirect()->route('employees.index')->with('success', 'Employee added successfully');
 } catch (QueryException $e) {
     if ($e->getCode() === '23000') {
      
@@ -100,7 +100,7 @@ public function show($id)
         $employee->email = $request->input('email');
         $employee->Password = Hash::make($request->input('Password'));
         $employee->save();
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.index')->with('success', 'Employee Updated successfully');
     }
 
     public function destroy(Employee $employee)

@@ -22,7 +22,7 @@ class LocationController extends Controller
         $location = new Location();
         $location->LocationName = $request->input('LocationName');
         $location->save();
-        return redirect()->route('locations.index');
+        return redirect()->route('locations.index')->with('success', 'Location added successfully');
     }
 
     public function show(Location $location)
@@ -39,12 +39,12 @@ class LocationController extends Controller
     {
         $location->LocationName = $request->input('LocationName');
         $location->save();
-        return redirect()->route('locations.index');
+        return redirect()->route('locations.index')->with('success', 'Location updated successfully');
     }
 
     public function destroy(Location $location)
     {
         $location->delete();
-        return redirect()->route('locations.index');
+        return redirect()->route('locations.index')->with('success', 'Location deleted successfully');
     }
 }

@@ -60,12 +60,6 @@
                     <div class="col-sm-6">
                         <h2><b>Clearance Form Requested Status</b></h2>
                     </div>
-                    <div class="col-sm-6">
-
-                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
-                            <i class="material-icons">add</i> <span>Add New Request</span>
-                        </a>
-                    </div>
                 </div>
             </div>
             <table class="table table-striped table-hover">

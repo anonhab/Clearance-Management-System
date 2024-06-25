@@ -8,8 +8,8 @@
                 </span>
                 <div class="text logo-text">
                     <span class="name">habtamu bitew </span>
-                    <span class="profession">Stakeholder {{ session('stakeholder_id') }}</span>
-                    <span class="profession"> location {{ session('stakeholderlocation_id') }}</span>
+                    <span class="profession">Stakeholder id {{ session('stakeholder_id') }}</span>
+                    <span class="profession"> location id {{ session('stakeholderlocation_id') }}</span>
                 </div>
             </div>
             <i class='bx bx-chevron-right toggle'></i>
@@ -24,7 +24,7 @@
           </a>
         </li>
         <li class="nav-link">
-          <a href="#">
+        <a href="{{url('stakeprofile')}}">
             <i class='material-icons icon'>account_circle</i>
             <span class="text nav-text">My profile</span>
           </a>

@@ -26,7 +26,7 @@ class CleanUpdateController extends Controller
         $clearanceForm = new ClearanceForm();
         $clearanceForm->Status = $request->input('Status');
         $clearanceForm->save();
-        return redirect()->route('clearanceForms.index');
+        return redirect()->route('clearanceForms.index')->with('success', 'SUbmitted successfully');
     }
 
 
@@ -56,7 +56,7 @@ class CleanUpdateController extends Controller
         if ($clearanceForm) {
             $clearanceForm->Status = $request->input('Status');
             $clearanceForm->save();
-            return redirect()->route('clearanceForms.index');
+            return redirect()->route('clearanceForms.index')->with('success', 'Submitted  successfully');
         } else {
             return redirect()->route('clearanceForms.index')->with('error', 'Clearance Form not found');
         }

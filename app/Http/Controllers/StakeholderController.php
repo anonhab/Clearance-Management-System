@@ -31,7 +31,7 @@ class StakeholderController extends Controller
         $stakeholder->Email = $request->input('Email');
         $stakeholder->Password = $request->input('Password');
         $stakeholder->save();
-        return back()->withInput();
+        return back()->withInput()->with('success', 'stakeholder updated successfully');
     }
 
     public function destroy(Stakeholder $stakeholder)

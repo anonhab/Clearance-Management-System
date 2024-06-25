@@ -29,7 +29,7 @@ class BossController extends Controller
         $boss->Email = $request->input('Email');
         $boss->Password = Hash::make($request->input('Password'));
         $boss->save();
-        return redirect()->route('bosses.index');
+        return redirect()->route('bosses.index')->with('success', 'Boss created successfully');
        } catch (QueryException $e) {
         if ($e->getCode() === '23000') {
 
@@ -66,6 +66,6 @@ class BossController extends Controller
     public function destroy(Boss $boss)
     {
         $boss->delete();
-        return redirect()->route('bosses.index');
+        return redirect()->route('bosses.index')->with('success', 'Boss Deleted successfully');
     }
 }

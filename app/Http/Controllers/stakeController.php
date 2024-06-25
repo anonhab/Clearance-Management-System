@@ -7,6 +7,10 @@ use App\Models\Boss;
 use App\Models\ClearanceForm;
 use App\Models\Location;
 use App\Models\ClearanceFormApproval;
+use App\Models\Stakeholder;
+use App\Models\StakeholderLocation;
+use Illuminate\Support\Facades\Hash;
+
 class stakeController extends Controller
 
 {
@@ -22,7 +26,37 @@ class stakeController extends Controller
         $employees = Employee::all();
         return view('employees.clearance', compact('employees'));
     }
-    
+    public function  profile(Request $request)
+    {
+
+        $stakeId = $request->session()->get('stakeholderlocation_id');
+        $stake = StakeholderLocation::findOrFail($stakeId);
+        $stake_id=$stake->StakeholderID;
+        $stakeholder = Stakeholder::findOrFail($stake_id);
+        return view('stakeholders.profile', compact('stakeholder','stake'));
+    }
+    public function changePassword(Request $request)
+    {
+        // $validator = Validator::make($request->all(), [
+        //     'current_password' => 'required',
+        //     'new_password' => 'required|min:8|confirmed',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return back()->withErrors($validator)->withInput()->with('modal', 'changePasswordModal');
+        // }
+
+        $stakeId = $request->session()->get('stakeholderlocation_id');
+        $stake = StakeholderLocation::findOrFail($stakeId);
+        if (!Hash::check($request->current_password, $stake->Password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect'])->withInput();
+        }
+
+        $stake->Password = Hash::make($request->new_password);
+        $stake->save();
+
+        return back()->with('success', 'Password changed successfully');
+    }
     public function clearance()
     {
         $location = Location::all();
