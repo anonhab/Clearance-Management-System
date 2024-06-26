@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Boss;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,8 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        return view('admin.employee', compact('employees'));
+        $bosses =Boss::all();
+        return view('admin.employee', compact('employees','bosses'));
     }
     public function home()
     {
@@ -51,6 +53,7 @@ public function store(Request $request)
     $employee->Workname = $request->input('Workname');
     $employee->email = $request->input('email');
     $employee->Password = Hash::make($request->input('Password'));
+    $employee->BossID = $request->input('BossID');
     $employee->save();
 
     return redirect()->route('employees.index')->with('success', 'Employee added successfully');

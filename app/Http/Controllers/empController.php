@@ -23,12 +23,13 @@ class empController extends Controller
 
         // Find the employee by the given ID from the session
         $employees = Employee::where('EmployeeID', $employeeId)->get();
-
+        foreach($employees as $employe){
+        $boss = Boss::findOrFail($employe->BossID);
+        }
         // Get all bosses and clearance forms as before
-        $bosses = Boss::all();
         $clearanceForm = ClearanceForm::where('EmployeeID', $employeeId)->get();
         // Return the view with the retrieved data
-        return view('employees.request', compact('employees', 'bosses', 'clearanceForm'));
+        return view('employees.request', compact('employees','boss','clearanceForm'));
     }
     public function home()
     {

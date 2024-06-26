@@ -83,10 +83,9 @@
 
             <div class="form-group">
               <label for="BossID">BossID</label>
-              <select id="BossID" name="BossID" class="form-control" required>
-                @foreach ($bosses as $boss)
+              <select readonly  id="BossID" name="BossID" class="form-control" required>
+                
                 <option value="{{$boss->BossID}}">{{$boss->BossID}}-> {{$boss->Full_name}}</option>
-                @endforeach
               </select>
             </div>
             <div class="form-group">
