@@ -63,7 +63,22 @@ class stakeController extends Controller
         $employees = Employee::all();
         return view('employees.clearance', compact('employees','location'));
     }
-    
+    public function showImage(Request $request)
+    {
+        $employeeId = $request->session()->get('stakeholder_id');
+
+        if (!$employeeId) {
+            abort(404, 'Employee not found in session.');
+        }
+
+        $employee = Stakeholder::find($employeeId);
+
+        if (!$employee || !$employee->image) {
+            abort(404, 'Image not found.');
+        }
+
+        return response($employee->image)->header('Content-Type', 'image/jpeg');
+    }
     public function request()
     {
         $employees = Employee::all();

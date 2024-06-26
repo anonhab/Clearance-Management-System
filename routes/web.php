@@ -38,6 +38,7 @@ Route::middleware('emp')->group(function () {
     Route::get('/print', [empController::class, 'print']);
     Route::get('/profile', [empController::class, 'profile']);
     Route::post('change-password', [empController::class, 'changePassword'])->name('changepassword');
+    Route::get('/employee/image', [empController::class, 'showImage'])->name('employee.image');
 });
 
 // Boss routes
@@ -45,6 +46,7 @@ Route::middleware('boss')->group(function () {
     Route::resource('boss', bossmanController::class);
     Route::get('/bossprofile', [bossmanController::class, 'profile']);
     Route::post('boss_change-password', [bossmanController::class, 'changePassword'])->name('bosschangepassword');
+    Route::get('/boss/image', [bossmanController::class, 'bossshowImage'])->name('boss.image');
 });
 
 // Stakeholder routes
@@ -52,6 +54,7 @@ Route::middleware('stake')->group(function () {
     Route::resource('stake', stakeController::class);
     Route::get('/stakeprofile', [stakeController::class, 'profile']);
     Route::post('stake_change-password', [stakeController::class, 'changePassword'])->name('stakechangepassword');
+    Route::get('/stake/image', [stakeController::class, 'stakeshowImage'])->name('stake.image');
 });
 
 Route::resource('employees', EmployeeController::class)->only(['index', 'show']);

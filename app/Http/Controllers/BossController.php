@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -20,27 +21,39 @@ class BossController extends Controller
     }
 
     public function store(Request $request)
-    {
-        try{
+{
+    try {
+ 
         $boss = new Boss();
-        $boss->EmployeeID = $request->input('EmployeeID');
         $boss->Full_name = $request->input('Full_name');
         $boss->Responsibility = $request->input('Responsibility');
         $boss->Email = $request->input('Email');
         $boss->Password = Hash::make($request->input('Password'));
-        $boss->save();
-        return redirect()->route('bosses.index')->with('success', 'Boss created successfully');
-       } catch (QueryException $e) {
-        if ($e->getCode() === '23000') {
 
-            $errorMessage = 'The email  already exists.';
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageData = file_get_contents($image);
+            $boss->image = $imageData;
+        }
+
+        $boss->save();
+
+        return redirect()->route('bosses.index')->with('success', 'Boss created successfully');
+    } catch (QueryException $e) {
+        if ($e->getCode() === '23000') {
+            $errorMessage = 'The email already exists.';
             return redirect()->back()->with('error', $errorMessage);
         }
 
-        // Handle other possible exceptions
+         
+        return redirect()->back()->with('error', 'An unexpected error occurred.');
+    } catch (\Exception $e) {
+        // Log any other exceptions
+         
         return redirect()->back()->with('error', 'An unexpected error occurred.');
     }
-    }
+}
+
 
     public function show(Boss $boss)
     {
@@ -54,11 +67,17 @@ class BossController extends Controller
 
     public function update(Request $request, Boss $boss)
     {
-        $boss->EmployeeID = $request->input('EmployeeID');
         $boss->Full_name = $request->input('Full_name');
         $boss->Responsibility = $request->input('Responsibility');
         $boss->Email = $request->input('Email');
-        $boss->Password = $request->input('Password');
+        $boss->Password = Hash::make($request->input('Password'));
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageData = file_get_contents($image);
+            $boss->image = $imageData;
+        }
+
+
         $boss->save();
         return redirect()->route('bosses.index');
     }

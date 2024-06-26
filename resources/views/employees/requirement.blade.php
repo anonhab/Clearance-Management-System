@@ -34,6 +34,18 @@
       margin-top: 30px;
     }
 
+    .header-banner {
+      background-color: #4CAF50;
+      /* Change to your preferred color */
+      color: white;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      width: 100%;
+       
+    }
+
     h2 {
       font-size: 1.5rem;
       color: #111e88;
@@ -49,11 +61,12 @@
 </head>
 
 <body>
+
   <nav class="sidebar close">
     <header>
       <div class="image-text">
         <span class="image">
-          <img src="su/v.png" alt="">
+        <img src="{{ route('employee.image') }}" alt="Employee Image">
         </span>
         <div class="text logo-text">
           <span class="name">habtamu bitew</span>
@@ -116,6 +129,7 @@
   </nav>
 
   <section class="home">
+    <!-- <div class="header-banner">Bahirdar University Clearance Form Management System</div> -->
     <div class="container">
       <h1>Employee Clearance Process</h1>
       <div class="info-section">

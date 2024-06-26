@@ -5,7 +5,8 @@
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="su/v.png" alt="">
+                <img src="{{ route('employee.image') }}" alt="Employee Image">
+
                 </span>
                 <div class="text logo-text">
                     <span class="name">habtamu bitew</span>
@@ -84,7 +85,8 @@
                 </div>
                 @endif
                 <div class="center">
-                    <img src="{{ asset('su/v.png') }}" class="pimg" alt="Profile Image">
+                    <img src="{{ route('employee.image') }}" class="pimg" alt="Employee Image">
+
                 </div>
                 <div class="profile-info">
                     <h3>File Number:</h3>

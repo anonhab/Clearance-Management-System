@@ -56,7 +56,7 @@
     <div id="addEmployeeModal" class="modal  fade">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form action="{{url('stakeholders')}}" method="POST">
+          <form action="{{url('stakeholders')}}" method="POST" enctype="multipart/form-data">
             @csrf <!-- CSRF protection -->
             <div class="modal-header">
               <h4 class="modal-title">Add New</h4>
@@ -71,6 +71,10 @@
                 <label for="work_name"> Name</label>
                 <input type="text" id="FullName" name="FullName" class="form-control" required>
               </div>
+              <div class="form-group">
+              <label for="worker_name">profile</label>
+              <input type="file" name="image" required>
+            </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

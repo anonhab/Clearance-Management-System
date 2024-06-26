@@ -42,31 +42,36 @@ class EmployeeController extends Controller
     }
 
    
-public function store(Request $request)
-{
-    try{
-    $employee = new Employee();
-    $employee->File_number = $request->input('File_number');
-    $employee->FirstName = $request->input('FirstName');
-    $employee->LastName = $request->input('LastName');
-    $employee->Workdep = $request->input('Workdep');
-    $employee->Workname = $request->input('Workname');
-    $employee->email = $request->input('email');
-    $employee->Password = Hash::make($request->input('Password'));
-    $employee->BossID = $request->input('BossID');
-    $employee->save();
+    public function store(Request $request)
+    {
+        try {
+            $employee = new Employee();
+            $employee->File_number = $request->input('File_number');
+            $employee->FirstName = $request->input('FirstName');
+            $employee->LastName = $request->input('LastName');
+            $employee->Workdep = $request->input('Workdep');
+            $employee->Workname = $request->input('Workname');
+            $employee->email = $request->input('email');
+            $employee->Password = Hash::make($request->input('Password'));
+            $employee->BossID = $request->input('BossID');
+            
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageData = file_get_contents($image);
+                $employee->image = $imageData;
+            }
 
-    return redirect()->route('employees.index')->with('success', 'Employee added successfully');
-} catch (QueryException $e) {
-    if ($e->getCode() === '23000') {
-     
-        $errorMessage = 'The email  already exists.';
-        return redirect()->back()->with('error', $errorMessage);
+            $employee->save();
+
+            return redirect()->route('employees.index')->with('success', 'Employee added successfully');
+        } catch (QueryException $e) {
+            if ($e->getCode() === '23000') {
+                $errorMessage = 'The email already exists.';
+                return redirect()->back()->with('error', $errorMessage);
+            }
+            return redirect()->back()->with('error', 'An unexpected error occurred.');
+        }
     }
-    // Handle other possible exceptions
-    return redirect()->back()->with('error', 'An unexpected error occurred.');
-}
-}
 
 
 public function show($id)

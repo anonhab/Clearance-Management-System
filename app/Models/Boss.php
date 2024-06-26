@@ -13,11 +13,11 @@ class Boss extends Model implements Authenticatable
     protected $primaryKey = 'BossID';
     protected $table = 'Bosses';
     protected $fillable = [
-        'EmployeeID',
         'Full_name',
         'Responsibility',
         'Email',
         'Password',
+        'image',
     ];
 
     public function employee()

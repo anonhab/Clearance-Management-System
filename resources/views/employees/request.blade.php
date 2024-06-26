@@ -5,7 +5,7 @@
   <header>
     <div class="image-text">
       <span class="image">
-        <img src="su/v.png" alt="">
+      <img src="{{ route('employee.image') }}" alt="Employee Image">
       </span>
       <div class="text logo-text">
         <span class="name">habtamu bitew</span>

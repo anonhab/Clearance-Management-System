@@ -54,6 +54,22 @@ class bossmanController extends Controller
 
         return back()->with('success', 'Password changed successfully');
     }
+    public function bossshowImage(Request $request)
+    {
+        $bossid = $request->session()->get('boss_id');
+
+        if (!$bossid) {
+            abort(404, 'Employee not found in session.');
+        }
+
+        $boss = Boss::find($bossid);
+
+        if (!$boss || !$boss->image) {
+            abort(404, 'Image not found.');
+        }
+
+        return response($boss->image)->header('Content-Type', 'image/jpeg');
+    }
     public function clearance()
     {
         $location = Location::all();

@@ -58,7 +58,7 @@
     <div id="addEmployeeModal" class="modal  fade">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form action="{{route('bosses.store')}}" method="POST">
+          <form action="{{route('bosses.store')}}" method="POST" enctype="multipart/form-data">
             @csrf <!-- CSRF protection -->
             <div class="modal-header">
               <h4 class="modal-title">Add New</h4>
@@ -73,6 +73,10 @@
                 <label for="worker_name">Responsibility</label>
                 <input type="text" id="Responsibility" name="Responsibility" class="form-control" required>
               </div>
+              <div class="form-group">
+              <label for="worker_name">profile</label>
+              <input type="file" name="image" required>
+            </div>
               <div class="form-group">
                 <label for="worker_name">Email</label>
                 <input type="email" id="Email" name="Email" class="form-control" required>

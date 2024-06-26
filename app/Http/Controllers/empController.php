@@ -68,6 +68,22 @@ class empController extends Controller
 
         return back()->with('success', 'Password changed successfully');
     }
+    public function showImage(Request $request)
+    {
+        $employeeId = $request->session()->get('employee_id');
+
+        if (!$employeeId) {
+            abort(404, 'Employee not found in session.');
+        }
+
+        $employee = Employee::find($employeeId);
+
+        if (!$employee || !$employee->image) {
+            abort(404, 'Image not found.');
+        }
+
+        return response($employee->image)->header('Content-Type', 'image/jpeg');
+    }
     public function clearance(Request $request)
     {
         $employeeId = $request->session()->get('employee_id');

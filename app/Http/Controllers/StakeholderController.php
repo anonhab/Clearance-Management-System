@@ -16,7 +16,11 @@ class StakeholderController extends Controller
         $stakeholder = new Stakeholder();
         $stakeholder->Workdep = $request->input('Workdep');
         $stakeholder->FullName = $request->input('FullName');
-
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageData = file_get_contents($image);
+            $stakeholder->image = $imageData;
+        }
         $stakeholder->save();
         return back()->withInput();
     }
@@ -30,6 +34,11 @@ class StakeholderController extends Controller
         $stakeholder->FullName = $request->input('FullName');
         $stakeholder->Email = $request->input('Email');
         $stakeholder->Password = $request->input('Password');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageData = file_get_contents($image);
+            $stakeholder->image = $imageData;
+        }
         $stakeholder->save();
         return back()->withInput()->with('success', 'stakeholder updated successfully');
     }

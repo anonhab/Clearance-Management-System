@@ -10,6 +10,7 @@ class Stakeholder extends Model
     protected $fillable = [
         'Workdep',
         'FullName',
+        'image',
     ];
 
     public function stakeholderLocations()

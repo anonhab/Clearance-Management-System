@@ -17,6 +17,7 @@ class Employee extends Authenticatable
         'File_number',
         'FirstName',
         'LastName',
+        'image',
         'Workdep',
         'Workname',
         'email',
