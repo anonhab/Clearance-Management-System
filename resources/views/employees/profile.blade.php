@@ -43,6 +43,7 @@
                         <a href="{{url('clearance')}}">
                             <i class='material-icons icon'>check_circle</i>
                             <span class="text nav-text">My Clearance</span>
+                            <span style="background-color: red;" class="badge badge-danger">1</span>
                         </a>
                     </li>
                     @endif

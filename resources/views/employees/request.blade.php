@@ -38,15 +38,16 @@
           </a>
         </li>
         @foreach($clearanceForm as $cl)
-          @if($cl->Status=="Approved")
-            <li class="nav-link">
-              <a href="{{url('clearance')}}">
-                <i class='material-icons icon'>check_circle</i>
-                <span class="text nav-text">My Clearance</span>
-              </a>
-            </li>
-          @endif
-        @endforeach
+                    @if($cl->Status=="Approved")
+                    <li class="nav-link">
+                        <a href="{{url('clearance')}}">
+                            <i class='material-icons icon'>check_circle</i>
+                            <span class="text nav-text">My Clearance</span>
+                            <span style="background-color: red;" class="badge badge-danger">1</span>
+                        </a>
+                    </li>
+                    @endif
+                    @endforeach
         <li class="nav-link">
           <a href="{{url('clearance-info')}}">
             <i class='material-icons icon'>info</i>
@@ -120,7 +121,9 @@
             <div class="col-sm-6">
             </div>
             <div class="col-sm-6">
+            @if(count($clearanceForm) == 0)
               <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>New Request</span></a>
+              @endif
             </div>
           </div>
         </div>

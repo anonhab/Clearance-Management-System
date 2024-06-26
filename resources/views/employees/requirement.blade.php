@@ -57,7 +57,9 @@
         </span>
         <div class="text logo-text">
           <span class="name">habtamu bitew</span>
-          <span class="profession">Employee {{ session('employee_id') }}</span>
+          <span class="profession">
+            Employee {{ session('employee_id') }}
+          </span>
         </div>
       </div>
       <i class='material-icons toggle'>chevron_right</i>
@@ -83,19 +85,23 @@
               <span class="text nav-text">Request Form</span>
             </a>
           </li>
+          @foreach($clearanceForm as $cl)
+          @if($cl->Status=="Approved")
           <li class="nav-link">
             <a href="{{url('clearance')}}">
               <i class='material-icons icon'>check_circle</i>
               <span class="text nav-text">My Clearance</span>
+              <span style="background-color: red;" class="badge badge-danger">1</span>
             </a>
           </li>
+          @endif
+          @endforeach
           <li class="nav-link">
             <a href="{{url('clearance-info')}}">
               <i class='material-icons icon'>info</i>
               <span class="text nav-text">Requirements</span>
             </a>
           </li>
-
         </ul>
       </div>
       <div class="bottom-content">
@@ -120,10 +126,10 @@
         <p>Once the request is submitted, wait for your boss to review and approve your request. This might take some time, depending on your boss's schedule and workload.</p>
 
         <h2>Step 3: Obtain the Clearance Form</h2>
-        <p>If your boss approves your request, you will be provided with a clearance form. This form will include all necessary details about your clearance.</p>
+        <p>If your boss approves your request, you will be provided with a clearance form.</p>
 
         <h2>Step 4: Send the Clearance Form to Stakeholders</h2>
-        <p>Finally, send the approved clearance form to the relevant stakeholders for final approval. Ensure that all required information is filled out correctly to avoid any delays.</p>
+        <p>Finally, send the approved clearance form to the relevant stakeholders for final approval.</p>
       </div>
     </div>
   </section>
