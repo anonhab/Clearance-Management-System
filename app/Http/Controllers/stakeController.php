@@ -104,9 +104,22 @@ class stakeController extends Controller
         return redirect()->route('employees.index');
     }
 
-    public function show(Employee $employee)
+    public function show(Request $request)
     {
-        return view('main', compact('employee'));
+        
+        $employeeId = $request->session()->get('stakeholder_id');
+
+        if (!$employeeId) {
+            abort(404, 'Employee not found in session.');
+        }
+
+        $employee = Stakeholder::find($employeeId);
+
+        if (!$employee || !$employee->image) {
+            abort(404, 'Image not found.');
+        }
+
+        return response($employee->image)->header('Content-Type', 'image/jpeg');
     }
 
     public function edit(Employee $employee)

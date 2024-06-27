@@ -85,7 +85,7 @@
             <table class="table table-striped table-hover table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Stakeholder</th>
+                        <th scope="col">Departmental Clearances</th>
                         <th scope="col">Location</th>
                         <th scope="col">Status</th>
                     </tr>

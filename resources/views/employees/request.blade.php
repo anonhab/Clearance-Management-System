@@ -90,7 +90,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="leaving_case">Leaving case</label>
+              <label for="leaving_case">Reason for Departure</label>
               <input type="text" id="leaving_case" name="Leaving_case" class="form-control" required>
               <input type="hidden" id="leaving_case" name="Status" value="pending" class="form-control">
             </div>
@@ -132,8 +132,8 @@
           <thead>
             <tr>
               <th>BossID</th>
-              <th>Leaving_case</th>
-              <th>RequestDate</th>
+              <th>Reason for Departure</th>
+              <th>Request Date</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>

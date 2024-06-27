@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <div class="inv-title">
-            <h1>BahirDar University Clearance Form</h1>
+            <h1>Clearance Form for Departing Faculty Members at Bahir Dar University</h1>
         </div>
         <img src="./logo.png" class="inv-logo" alt="University Logo" />
         <div class="inv-header">
@@ -21,22 +21,22 @@
             <div>
                 <h2>About Employee</h2>
                 <ul>
-                    <li>Full Name: {{$employees->FirstName}} {{$employees->LastName}}</li>
+                    <li>Name of Faculty Member: {{$employees->FirstName}} {{$employees->LastName}}</li>
                     <li>File Number: {{$employees->File_number}}</li>
-                    <li>Work Department: {{$employees->Workdep}}</li>
-                    <li>Work Name: {{$employees->Workname}}</li>
+                    <li>Department: {{$employees->Workdep}}</li>
+                    <li>Position Title: {{$employees->Workname}}</li>
                     @foreach($clearanceForms as $cl)
-                    <li>Leaving Case: {{$cl->Leaving_case}}</li>
+                    <li>Reason for Departure: {{$cl->Leaving_case}}</li>
                     @endforeach
                 </ul>
             </div>
             <div>
-                <h2>Allowder Boss</h2>
+                <h2>Approving Authority</h2>
                 <ul>
                     @foreach($bossname as $cl)
                     @foreach($clearanceForms as $clf)
                     @if($cl->BossID==$clf->BossID)
-                    <li>Boss ID Number: {{$cl->BossID}}</li>
+                    <li>Authority ID Number: {{$cl->BossID}}</li>
                     <li>Full Name: {{$cl->Full_name}}</li>
                     <li>Responsibility: {{$cl->Responsibility}}</li>
                     @endif
@@ -50,7 +50,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Stakeholders</th>
+                        <th>Departmental Clearances</th>
                         <th>Location</th>
                         <th>Status</th>
                     </tr>

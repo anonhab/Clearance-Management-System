@@ -76,8 +76,6 @@ class BossController extends Controller
             $imageData = file_get_contents($image);
             $boss->image = $imageData;
         }
-
-
         $boss->save();
         return redirect()->route('bosses.index');
     }

@@ -1,10 +1,11 @@
 @include('partials.header')
+
 <body>
     <nav class="sidebar close">
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="su/v.png" alt="">
+                    <img src="{{ route('stake.image') }}" alt="Employee Image">>
                 </span>
                 <div class="text logo-text">
                     <span class="name">habtamu bitew </span>
@@ -15,45 +16,45 @@
             <i class='bx bx-chevron-right toggle'></i>
         </header>
         <div class="menu-bar">
-    <div class="menu">
-      <ul class="menu-links">
-        <li class="nav-link">
-          <a href="#">
-            <i class='material-icons icon'>home</i>
-            <span class="text nav-text">Home</span>
-          </a>
-        </li>
-        <li class="nav-link">
-        <a href="{{url('stakeprofile')}}">
-            <i class='material-icons icon'>account_circle</i>
-            <span class="text nav-text">My profile</span>
-          </a>
-        </li>
-        <li class="nav-link">
-          <a href="{{url('stake')}}">
-            <i class='material-icons icon'>assignment</i>
-            <span class="text nav-text">Requested Form</span>
-          </a>
-        </li>
-       
-      </ul>
-    </div>
-    <div class="bottom-content">
-      <li class="">
-        <a href="{{url('/logout')}}">
-          <i class='material-icons icon'>logout</i>
-          <span class="text nav-text">Logout</span>
-        </a>
-      </li>
-    </div>
-  </div>
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='material-icons icon'>home</i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="{{url('stakeprofile')}}">
+                            <i class='material-icons icon'>account_circle</i>
+                            <span class="text nav-text">My profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="{{url('stake')}}">
+                            <i class='material-icons icon'>assignment</i>
+                            <span class="text nav-text">Requested Form</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="bottom-content">
+                <li class="">
+                    <a href="{{url('/logout')}}">
+                        <i class='material-icons icon'>logout</i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
     </nav>
     <section class="home">
         @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
-      @elseif(session('error'))
+        @elseif(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
-      @endif
+        @endif
         <div class="container">
             <div class="table-wrapper">
                 <div class="table-title">
@@ -80,7 +81,7 @@
                     <tbody>
                         @foreach($clearanceApproval as $cl)
                         <tr>
-                            <td><a href="{{ route('clean_update.show', $cl->ClearanceFormID) }}">View</a></td> 
+                            <td><a href="{{ route('clean_update.show', $cl->ClearanceFormID) }}">View</a></td>
                             <td>{{$cl->updated_at}}</td>
                             <td>{{$cl->created_at}}</td>
                             <td>{{$cl->ApprovalStatus}}</td>
@@ -91,10 +92,10 @@
                         </tr>
                         @endforeach
                         @else
-              
-                <h3 style="background-color: rgba(11, 46, 83, 0.872);color:aliceblue; width:180px; " colspan="5">No data found</h3>
-              
-            @endif
+
+                        <h3 style="background-color: rgba(11, 46, 83, 0.872);color:aliceblue; width:180px; " colspan="5">No data found</h3>
+
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -123,8 +124,8 @@
                         <div class="form-group">
                             <label for="leaving_case">Comment</label>
                             <input type="Comment" id="Comment" name="Comments" class="form-control" required>
-                          </div>
-              
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -152,36 +153,35 @@
                 });
             });
         });
-//         document.getElementById('replaceButton').addEventListener('click', function() {
-//             const clearanceForm = {
-//          ClearanceFormID: $c,
-//          EmployeeID: 456,
-//          BossID: 789,
-//          Leaving_case: 'Resigned',
-//         RequestDate: '2024-06-01',
-//         Status: 'Approved',
-//         created_at: '2024-06-10'
-//     };
+        //         document.getElementById('replaceButton').addEventListener('click', function() {
+        //             const clearanceForm = {
+        //          ClearanceFormID: $c,
+        //          EmployeeID: 456,
+        //          BossID: 789,
+        //          Leaving_case: 'Resigned',
+        //         RequestDate: '2024-06-01',
+        //         Status: 'Approved',
+        //         created_at: '2024-06-10'
+        //     };
 
-//     const content = document.getElementById('content');
-//     content.innerHTML = `
-//         <div class="container">
-//             <div class="employee-details">
-//                 <h2>Clearance Information</h2>
-//                 <ul class="employee-list">
-//                     <li><strong>ID:</strong> ${clearanceForm.ClearanceFormID}</li>
-//                     <li><strong>Employee ID number:</strong> ${clearanceForm.EmployeeID} <a href="/employees/show/${clearanceForm.EmployeeID}">View</a></li>
-//                     <li><strong>Boss ID:</strong> ${clearanceForm.BossID}</li>
-//                     <li><strong>Leaving case:</strong> ${clearanceForm.Leaving_case}</li>
-//                     <li><strong>Requested Date:</strong> ${clearanceForm.RequestDate}</li>
-//                     <li><strong>Status:</strong> ${clearanceForm.Status}</li>
-//                     <li><strong>Registered date:</strong> ${clearanceForm.created_at}</li>
-//                 </ul>
-//             </div>
-//         </div>
-//     `;
-// });
-
+        //     const content = document.getElementById('content');
+        //     content.innerHTML = `
+        //         <div class="container">
+        //             <div class="employee-details">
+        //                 <h2>Clearance Information</h2>
+        //                 <ul class="employee-list">
+        //                     <li><strong>ID:</strong> ${clearanceForm.ClearanceFormID}</li>
+        //                     <li><strong>Employee ID number:</strong> ${clearanceForm.EmployeeID} <a href="/employees/show/${clearanceForm.EmployeeID}">View</a></li>
+        //                     <li><strong>Boss ID:</strong> ${clearanceForm.BossID}</li>
+        //                     <li><strong>Leaving case:</strong> ${clearanceForm.Leaving_case}</li>
+        //                     <li><strong>Requested Date:</strong> ${clearanceForm.RequestDate}</li>
+        //                     <li><strong>Status:</strong> ${clearanceForm.Status}</li>
+        //                     <li><strong>Registered date:</strong> ${clearanceForm.created_at}</li>
+        //                 </ul>
+        //             </div>
+        //         </div>
+        //     `;
+        // });
     </script>
     <script src="su/script.js"></script>
 </body>
