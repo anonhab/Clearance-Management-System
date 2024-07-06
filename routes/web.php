@@ -39,6 +39,7 @@ Route::middleware('emp')->group(function () {
     Route::get('/profile', [empController::class, 'profile']);
     Route::post('change-password', [empController::class, 'changePassword'])->name('changepassword');
     Route::get('/employee/image', [empController::class, 'showImage'])->name('employee.image');
+    Route::get('/clearance-info', [EmployeeController::class, 'showinfo']);
 });
 
 // Boss routes
@@ -64,6 +65,7 @@ Route::resource('clearanceForms', ClearanceFormController::class);
 Route::resource('cleanapp_update', cleanappController::class);
 // Authentication routes
 Route::get('/login', [LoginController::class, 'showLoginForm']);
+Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout']);
-Route::get('/clearance-info', [EmployeeController::class, 'showinfo']);
+
