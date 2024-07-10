@@ -66,47 +66,90 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2><b>Clearance Approval Requested Status</b></h2>
+                            <h2><b>Substake</b></h2>
                         </div>
                         <div class="col-sm-6">
+                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add new substake</span></a>
                         </div>
                     </div>
                 </div>
                 <table class="table table-striped table-hover">
                     <thead>
-                        @if(count($clearanceApproval) > 0)
                         <tr>
-                            <th>ClearanceFormID</th>
-                            <th>ApprovalDate</th>
-                            <th>RequestDate</th>
-                            <th>ApprovalStatus</th>
-                            <th>Comments</th>
-                            <th>Actions</th>
+                            <th>Image</th>
+                            <th>FullName</th>
+                            <th>Workdep</th>
+                            <th>email</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($clearanceApproval as $cl)
+                        @foreach($substakes as $stake)
                         <tr>
-                            <td><a href="{{ route('clean_update.show', $cl->ClearanceFormID) }}">View</a></td>
-                            <td>{{$cl->updated_at}}</td>
-                            <td>{{$cl->created_at}}</td>
-                            <td>{{$cl->ApprovalStatus}}</td>
-                            <td>{{$cl->Comments}}</td>
+                            <td><img src="{{asset('storage/'.$stake->image)}}" alt="image" style="width: 100px; height: 100px;"></td>
+                            <td>{{$stake->fullname}}</td>
+                            <td>{{$stake->workdep}}</td>
+                            <td>{{$stake->email}}</td>
                             <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $cl->ApprovalID }}"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
                         @endforeach
-                        @else
-
-                        <h3 style="background-color: rgba(11, 46, 83, 0.872);color:aliceblue; width:180px; " colspan="5">No data found</h3>
-
-                        @endif
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
+
+    <div id="addEmployeeModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('substakes.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf <!-- CSRF protection -->
+                <div class="modal-header">
+                    <h4 class="modal-title">New request for clearance form</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="SubstakesID">SubstakesID</label>
+                        <input type="text" id="SubstakesID" name="SubstakesID" class="form-control" >
+                    </div>
+                    <input type="hidden" id="StakeholderLocationID" name="StakeholderLocationID" class="form-control" required>
+                    <div class="form-group">
+                        <label for="FullName">Full Name</label>
+                        <input type="text" id="FullName" name="FullName" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Workdep">Work Department</label>
+                        <input type="text" id="Workdep" name="Workdep" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" id="image" name="image" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-success" value="Request">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
     <div id="editEmployeeModal" class="modal fade">
         <div class="modal-dialog">

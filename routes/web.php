@@ -17,6 +17,8 @@ use App\Http\Controllers\StakeholderLocationController;
 use App\Http\Controllers\empController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\stakeController;
+use App\Http\Controllers\SubstakeApprovalController;
+use App\Http\Controllers\SubstakeController;
 
 // Admin routes
 Route::middleware('admin')->group(function () {
@@ -69,3 +71,8 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout']);
 
+// Resource routes for Substake
+Route::resource('substakes', SubstakeController::class);
+
+// Resource routes for SubstakeApproval
+Route::resource('substake-approvals', SubstakeApprovalController::class);

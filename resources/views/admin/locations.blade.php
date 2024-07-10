@@ -44,7 +44,6 @@
             </table>
       </div>
     </div>
-   
     <!-- Add Modal HTML -->
     <div id="addEmployeeModal" class="modal  fade">
       <div class="modal-dialog">
