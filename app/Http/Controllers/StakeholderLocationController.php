@@ -31,6 +31,7 @@ class StakeholderLocationController extends Controller
             $stakeholderLocation->LocationID = $request->input('LocationID');
             $stakeholderLocation->Email = $request->input('email');
             $stakeholderLocation->Password =  Hash::make($request->input('Password'));
+            $stakeholderLocation->Priority = $request->input('Priority');
             $stakeholderLocation->save();
             return redirect()->route('stakeholderLocations.index')->with('success', 'stakeholder location add successfully');
         } catch (QueryException $e) {

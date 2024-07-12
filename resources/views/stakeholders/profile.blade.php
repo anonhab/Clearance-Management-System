@@ -1,12 +1,12 @@
 @include('partials.header')
 
 <body>
-<nav class="sidebar close">
+    <nav class="sidebar close">
         <header>
             <div class="image-text">
                 <span class="image">
-           
-                <img src="{{ route('stake.image') }}" alt="Employee Image">
+
+                    <img src="{{ route('stake.image') }}" alt="Employee Image">
 
                 </span>
                 <div class="text logo-text">
@@ -18,38 +18,44 @@
             <i class='bx bx-chevron-right toggle'></i>
         </header>
         <div class="menu-bar">
-    <div class="menu">
-      <ul class="menu-links">
-        <li class="nav-link">
-          <a href="#">
-            <i class='material-icons icon'>home</i>
-            <span class="text nav-text">Home</span>
-          </a>
-        </li>
-        <li class="nav-link">
-          <a href="{{url('stakeprofile')}}">
-            <i class='material-icons icon'>account_circle</i>
-            <span class="text nav-text">My profile</span>
-          </a>
-        </li>
-        <li class="nav-link">
-          <a href="{{url('stake')}}">
-            <i class='material-icons icon'>assignment</i>
-            <span class="text nav-text">Requested Form</span>
-          </a>
-        </li>
-       
-      </ul>
-    </div>
-    <div class="bottom-content">
-      <li class="">
-        <a href="{{url('/logout')}}">
-          <i class='material-icons icon'>logout</i>
-          <span class="text nav-text">Logout</span>
-        </a>
-      </li>
-    </div>
-  </div>
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='material-icons icon'>home</i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="{{url('stakeprofile')}}">
+                            <i class='material-icons icon'>account_circle</i>
+                            <span class="text nav-text">My profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="{{url('stake')}}">
+                            <i class='material-icons icon'>assignment</i>
+                            <span class="text nav-text">Requested Form</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="{{url('substakes')}}">
+                            <i class='material-icons icon'>people</i>
+                            <span class="text nav-text">Substake</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="bottom-content">
+                <li class="">
+                    <a href="{{url('/logout')}}">
+                        <i class='material-icons icon'>logout</i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
     </nav>
     <section class="home">
         <div class="conprofile">
@@ -69,10 +75,10 @@
                 </div>
                 @endif
                 <div class="center">
-                <img src="{{ route('stake.image') }}" class="pimg" alt="Employee Image">
+                    <img src="{{ route('stake.image') }}" class="pimg" alt="Employee Image">
                 </div>
                 <div class="profile-info">
-                   
+
                     <h3>Name:</h3>
                     <div class="value">{{ $stakeholder->Workdep }}</div>
 

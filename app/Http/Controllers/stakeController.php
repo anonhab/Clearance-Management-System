@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,14 +15,46 @@ use Illuminate\Support\Facades\Hash;
 class stakeController extends Controller
 
 {
-    
+
     public function index(Request $request)
     {
         $stakeId = $request->session()->get('stakeholderlocation_id');
+        $stake = StakeholderLocation::find($stakeId);
+        $hasrequest = ClearanceForm::where('hasRequest', 'true')->get();
         $clearanceApproval = ClearanceFormApproval::where('StakeholderLocationID', $stakeId)->get();
-        return view('stakeholders.stakeholders', compact('clearanceApproval'));
+        return view('stakeholders.stakeholders', compact('clearanceApproval', 'stake', 'hasrequest'));
     }
-    public function home()
+    public function setEmployeeIdInSession($employeeId)
+    {
+        // Set the employee ID in the session
+        session()->put('employee_id', $employeeId);
+        
+        // Retrieve the employee ID from the session
+        $employeeId = session()->get('employee_id');
+    
+        // Fetch necessary data
+        $locations = Location::all();
+        $employees = Employee::findOrFail($employeeId);
+        $stakeholders = Stakeholder::all();
+        $stakeholderLocations = StakeholderLocation::all();
+        $clearanceForms = ClearanceForm::where('EmployeeID', $employeeId)
+            ->where('Status', 'APPROVED')
+            ->get();
+        $bossname = Boss::all();
+        $clearanceApprovals = ClearanceFormApproval::whereIn('ClearanceFormID', $clearanceForms->pluck('ClearanceFormID'))->get();
+    
+        // Return the view with the fetched data
+        return view('stakeholdersprint', compact(
+            'employees',
+            'locations',
+            'stakeholders',
+            'stakeholderLocations',
+            'clearanceForms',
+            'clearanceApprovals',
+            'bossname'
+        ));
+    }
+        public function home()
     {
         $employees = Employee::all();
         return view('employees.clearance', compact('employees'));
@@ -31,9 +64,9 @@ class stakeController extends Controller
 
         $stakeId = $request->session()->get('stakeholderlocation_id');
         $stake = StakeholderLocation::findOrFail($stakeId);
-        $stake_id=$stake->StakeholderID;
+        $stake_id = $stake->StakeholderID;
         $stakeholder = Stakeholder::findOrFail($stake_id);
-        return view('stakeholders.profile', compact('stakeholder','stake'));
+        return view('stakeholders.profile', compact('stakeholder', 'stake'));
     }
     public function changePassword(Request $request)
     {
@@ -61,7 +94,7 @@ class stakeController extends Controller
     {
         $location = Location::all();
         $employees = Employee::all();
-        return view('employees.clearance', compact('employees','location'));
+        return view('employees.clearance', compact('employees', 'location'));
     }
     public function showImage(Request $request)
     {
@@ -106,7 +139,7 @@ class stakeController extends Controller
 
     public function show(Request $request)
     {
-        
+
         $employeeId = $request->session()->get('stakeholder_id');
 
         if (!$employeeId) {

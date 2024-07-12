@@ -10,22 +10,16 @@ class Substake extends Model
     use HasFactory;
 
     // The table associated with the model
-    protected $table = 'Substakes';
-
-    // The primary keys for the table
-    protected $primaryKey = ['SubstakesID', 'StakeholderLocationID'];
-    public $incrementing = false;
-    protected $keyType = 'int';
-
-    // The attributes that are mass assignable
+    protected $table = 'substakes'; // Adjust if necessary
+    protected $primaryKey = 'SubstakesID';
     protected $fillable = [
+        'SubstakesID',
+        'StakeholderLocationID',
         'FullName',
         'Workdep',
         'image',
         'email',
-        'password',
-        'created_at',
-        'updated_at'
+        'password'
     ];
 
     // The attributes that should be cast to native types

@@ -3,9 +3,9 @@
 <section class="home">
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
-  @elseif(session('error'))
+    @elseif(session('error'))
     <div class="alert alert-danger">{{ session('error') }}</div>
-  @endif
+    @endif
     <div class="container">
         <div class="table-wrapper">
             <div class="table-title">
@@ -77,11 +77,18 @@
                     <div class="form-group">
                         <label for="file_no">Email</label>
                         <input type="Email" id="Email" name="email" class="form-control" required>
-                      </div>
-                      <div class="form-group">
+                    </div>
+                    <div class="form-group">
                         <label for="allow_name">Password</label>
-                        <input type="Password" id="Password"  name="Password" class="form-control">
-                      </div>
+                        <input type="Password" id="Password" name="Password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="file_no">Priority</label>
+                        <select id="Priority" name="Priority" class="form-control" required>
+                            <option value="LOW">LOW</option>
+                            <option value="HIGH">HIGH</option>
+                        </select>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         <input type="submit" class="btn btn-success" value="Request">

@@ -24,7 +24,6 @@ class ClearanceFormController extends Controller
         $clearanceForm->EmployeeID = $request->input('EmployeeID');
         $clearanceForm->BossID = $request->input('BossID');
         $clearanceForm->Leaving_case = $request->input('Leaving_case');
-        $clearanceForm->RequestDate = $request->input('RequestDate');
         $clearanceForm->Status = $request->input('Status');
         $clearanceForm->save();
         return redirect()->route('clearanceForms.index')->with('success', 'Clearance form submitted successfully.');

@@ -18,23 +18,30 @@ class empController extends Controller
 {
     public function index(Request $request)
     {
-        // Retrieve the employee_id from the session
         $employeeId = $request->session()->get('employee_id');
-
-        // Find the employee by the given ID from the session
         $employees = Employee::where('EmployeeID', $employeeId)->get();
         foreach($employees as $employe){
         $boss = Boss::findOrFail($employe->BossID);
         }
-        // Get all bosses and clearance forms as before
         $clearanceForm = ClearanceForm::where('EmployeeID', $employeeId)->get();
-        // Return the view with the retrieved data
         return view('employees.request', compact('employees','boss','clearanceForm'));
     }
     public function home()
     {
         $employees = Employee::all();
         return view('employees.clearance', compact('employees'));
+    }
+    public function hasRequest(Request $request)
+    {
+        $employeeId = $request->session()->get('employee_id');
+        $clearanceForm = ClearanceForm::where('EmployeeID', $employeeId)->first();
+    
+        if ($clearanceForm) {
+            $clearanceForm->hasRequest = "true";
+            $clearanceForm->save();
+        }
+    
+        return redirect()->back();
     }
     public function  profile(Request $request)
     {

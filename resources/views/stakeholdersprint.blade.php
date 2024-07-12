@@ -1,5 +1,5 @@
-@include('partials.header')
 
+@include('head');
 <body>
     <nav class="sidebar close">
         <header>
@@ -62,85 +62,73 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
         <div class="container">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2><b>Clearance Approval Requested Status</b></h2>
-                        </div>
-                        <div class="col-sm-6">
-                        </div>
-                    </div>
-                </div>
-                @if ($stake->Priority=='HIGH')
-                <table class="table table-striped table-hover">
-                    <thead>
+        
+        <div class="inv-title">
 
-                        <tr>
-
-                            <th>ClearanceForm</th>
-                            <th>Requester</th>
-                            <th>Check</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($hasrequest as $request)
-                        <tr>
-                            <td>
-                                <a href="{{ route('clean_update.show', $request->ClearanceFormID) }}">
-                                    <i class="material-icons">visibility</i> View
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{{ route('employees.show', $request->EmployeeID) }}">
-                                    <i class="material-icons">visibility</i> View
-                                </a>
-                            </td>
-                            <td>
-                            <a href="{{ route('set-employee-id-in-session', $request->EmployeeID) }}/" class="btn btn-primary">View Request</a>                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                @else
-                <table class="table table-striped table-hover">
-                    <thead>
-                        @if(count($clearanceApproval) > 0)
-                        <tr>
-                            <th>ClearanceFormID</th>
-                            <th>ApprovalDate</th>
-                            <th>RequestDate</th>
-                            <th>ApprovalStatus</th>
-                            <th>Comments</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($clearanceApproval as $cl)
-                        <tr>
-                            <td><a href="{{ route('clean_update.show', $cl->ClearanceFormID) }}">View</a></td>
-                            <td>{{$cl->updated_at}}</td>
-                            <td>{{$cl->created_at}}</td>
-                            <td>{{$cl->ApprovalStatus}}</td>
-                            <td>{{$cl->Comments}}</td>
-                            <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $cl->ApprovalID }}"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <form action="#" method="post">
-                                    @csrf
-                                    <input type="hidden" name="ClearanceFormID" value="{{ $cl->ClearanceFormID }}">
-                                    <button class="btn btn-warning btn-sm"><b>Send for Review</b></button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                        @else
-                        <h3 style="background-color: rgba(11, 46, 83, 0.872);color:aliceblue; width:180px; " colspan="5">No data found</h3>
-                        @endif
-                    </tbody>
-                </table>
-                @endif
-            </div>
+        <h3>Following Departmental Clearance Approved in order of Requester</h3>
         </div>
+       
+        <div class="inv-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Departmental Clearances</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($stakeholderLocations as $stakeloc)
+                    <tr>
+                        @php
+                        $stakeholder = $stakeholders->firstWhere('StakeholderID', $stakeloc->StakeholderID);
+                        $location = $locations->firstWhere('LocationID', $stakeloc->LocationID);
+                        $stakeholderName = $stakeholder ? $stakeholder->Workdep : '';
+                        $locationName = $location ? $location->LocationName : '';
+                        @endphp
+                        <td>{{ $stakeholderName }}</td>
+                        <td>{{ $locationName }}</td>
+                        <td>
+                            @foreach ($clearanceForms as $clearanceForm)
+                            @foreach ($clearanceApprovals as $cp)
+                            @if ($cp->StakeholderLocationID == $stakeloc->StakeholderLocationID && $cp->ClearanceFormID == $clearanceForm->ClearanceFormID)
+                            @switch($cp->ApprovalStatus)
+                            @case('Approved')
+                            <p class="btn btn-success btn-sm">
+                                <span>{{ $cp->ApprovalStatus }}</span>
+                                @php
+
+                                @endphp
+                            </p>
+                            @break
+                            @case('Denied')
+                            <p class="btn btn-danger btn-sm">
+                                <span>{{ $cp->ApprovalStatus }}</span>
+                            </p>
+                            @break
+                            @case('Pending')
+                            <p class="btn btn-warning btn-sm">
+                                <span>{{ $cp->ApprovalStatus }}</span>
+                            </p>
+                            @break
+                            @default
+                            <p class="btn btn-secondary btn-sm">
+                                <span>{{ $cp->ApprovalStatus }}</span>
+                            </p>
+                            @endswitch
+                            @endif
+                            @endforeach
+                            @endforeach
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="inv-footer">
+            <div></div>
+        </div>
+    </div>
     </section>
 
     <div id="editEmployeeModal" class="modal fade">
@@ -195,22 +183,6 @@
             });
         });
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        function setEmployeeIdInSession(employeeId) {
-            $.ajax({
-                type: 'POST',
-                url: '/set-employee-id-in-session',
-                data: {
-                    employeeId: employeeId
-                },
-                success: function(data) {
-                    console.log('Employee ID set in session successfully!');
-                }
-            });
-        }
-    </script>
-    <script src="su/script.js"></script>
 </body>
 
 </html>

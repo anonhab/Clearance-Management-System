@@ -14,6 +14,7 @@ class StakeholderLocation extends Authenticatable
         'LocationID',
         'Email',
         'Password',
+        'Priority',
     ];
 
     public function stakeholder()

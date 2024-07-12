@@ -11,7 +11,7 @@ class ClearanceForm extends Model
         'EmployeeID',
         'BossID',
         'Leaving_case',
-        'RequestDate',
+        'hasRequest',
         'Status',
     ];
 

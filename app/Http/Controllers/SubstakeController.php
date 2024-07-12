@@ -23,17 +23,10 @@ class SubstakeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'StakeholderLocationID' => 'required|integer',
-            'FullName' => 'nullable|string|max:255',
-            'Workdep' => 'nullable|string',
-            'image' => 'nullable|image|max:2048', // Add validation for image file type and size
-            'email' => 'required|string|email|max:255|unique:substakes,email',
-            'password' => 'required|string|min:8', // Add validation for password
-        ]);
     
         try {
             $substake = new Substake();
+            $substake->SubstakesID = $request->input('SubstakesID');
             $substake->StakeholderLocationID = $request->input('StakeholderLocationID');
             $substake->FullName = $request->input('FullName');
             $substake->Workdep = $request->input('Workdep');
@@ -50,26 +43,54 @@ class SubstakeController extends Controller
     
             return redirect()->route('substakes.index')->with('success', 'Substake added successfully');
         } catch (QueryException $e) {
-            if ($e->getCode() === '23000') {
-                $errorMessage = 'The email already exists.';
-                return redirect()->back()->with('error', $errorMessage)->withInput();
-            }
     
             // Handle other possible exceptions
             return redirect()->back()->with('error', 'An unexpected error occurred.')->withInput();
         }
     }
     
+    public function showImage(Request $request)
+{
+    // Fetch all substakes
+    $substakes = Substake::all();
+
+    // Check if there are any substakes
+    if ($substakes->isEmpty()) {
+        abort(404, 'No substakes found.');
+    }
+
+    // Iterate over each substake to show the image
+    foreach ($substakes as $substake) {
+        // Check if the substake has an image
+        if ($substake->image) {
+            return response($substake->image)->header('Content-Type', 'image/jpeg');
+        }
+    }
+
+    // If no image is found in any substake
+    abort(404, 'No image found for any substake.');
+}
+
+
+
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $substake = Substake::find($id);
-        if (is_null($substake)) {
-            return response()->json(['message' => 'Substake not found'], 404);
+        $substake = new Substake();
+
+        if (!$substake) {
+            abort(404, 'Employee not found in session.');
         }
-        return response()->json($substake);
+
+        $substake = Substake::all();
+
+        if (!$substake || !$substake->image) {
+            abort(404, 'Image not found.');
+        }
+
+        return response($substake->image)->header('Content-Type', 'image/jpeg');
     }
 
     /**
@@ -77,35 +98,42 @@ class SubstakeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'StakeholderLocationID' => 'required|integer',
-            'FullName' => 'nullable|string|max:255',
-            'Workdep' => 'nullable|string',
-            'image' => 'nullable|image',
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|max:255',
-        ]);
-
         $substake = Substake::find($id);
-        if (is_null($substake)) {
-            return response()->json(['message' => 'Substake not found'], 404);
+        if (!$substake) {
+            return redirect()->back()->with('error', 'Substake not found.')->withInput();
         }
-
-        $substake->update($request->all());
-        return response()->json($substake);
+    
+        try {
+            $substake->SubstakesID = $request->input('SubstakesID');
+            $substake->StakeholderLocationID = $request->input('StakeholderLocationID');
+            $substake->FullName = $request->input('FullName');
+            $substake->Workdep = $request->input('Workdep');
+            $substake->email = $request->input('email');
+    
+            if ($request->input('password')) {
+                $substake->password = Hash::make($request->input('password'));
+            }
+    
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageData = file_get_contents($image);
+                $substake->image = $imageData;
+            }
+    
+            $substake->save();
+    
+            return redirect()->route('substakes.index')->with('success', 'Substake updated successfully');
+        } catch (QueryException $e) {
+            // Handle other possible exceptions
+            return redirect()->back()->with('error', 'An unexpected error occurred.')->withInput();
+        }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $substake = Substake::find($id);
-        if (is_null($substake)) {
-            return response()->json(['message' => 'Substake not found'], 404);
-        }
+    
 
         $substake->delete();
-        return response()->json(['message' => 'Substake deleted successfully']);
+        return redirect()->route('substakes.index')->with('success', 'Substake deleted successfully');
     }
 }

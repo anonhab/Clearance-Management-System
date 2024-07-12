@@ -39,6 +39,7 @@ Route::middleware('emp')->group(function () {
     Route::get('/clearance', [empController::class, 'clearance']);
     Route::get('/print', [empController::class, 'print']);
     Route::get('/profile', [empController::class, 'profile']);
+    Route::get('/hasrequest', [empController::class, 'hasrequest']);
     Route::post('change-password', [empController::class, 'changePassword'])->name('changepassword');
     Route::get('/employee/image', [empController::class, 'showImage'])->name('employee.image');
     Route::get('/clearance-info', [EmployeeController::class, 'showinfo']);
@@ -59,7 +60,7 @@ Route::middleware('stake')->group(function () {
     Route::post('stake_change-password', [stakeController::class, 'changePassword'])->name('stakechangepassword');
     Route::get('/stake/image', [stakeController::class, 'stakeshowImage'])->name('stake.image');
 });
-
+Route::get('/set-employee-id-in-session/{employeeId}', [stakeController::class, 'setEmployeeIdInSession'])->name('set-employee-id-in-session');
 Route::resource('employees', EmployeeController::class)->only(['index', 'show']);
 Route::resource('clean_update', CleanUpdateController::class);
 Route::resource('clearanceFormApprovals', ClearanceFormApprovalController::class);
@@ -73,6 +74,7 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 // Resource routes for Substake
 Route::resource('substakes', SubstakeController::class);
+Route::get('/sub/image', [SubstakeController::class, 'showImage'])->name('sub.image');
 
 // Resource routes for SubstakeApproval
 Route::resource('substake-approvals', SubstakeApprovalController::class);
