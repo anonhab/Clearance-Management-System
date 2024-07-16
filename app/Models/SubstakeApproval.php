@@ -14,18 +14,17 @@ class SubstakeApproval extends Model
 
     // The primary key for the table
     protected $primaryKey = 'SubstakesID';
-    public $incrementing = false;
-    protected $keyType = 'int';
 
     // The attributes that are mass assignable
     protected $fillable = [
         'ClearanceFormID',
         'ApprovalStatus',
         'Comments',
+        'SubstakesID',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'StakeholderLocationID'
     ];
-
     // The attributes that should be cast to native types
     protected $casts = [
         'created_at' => 'datetime',

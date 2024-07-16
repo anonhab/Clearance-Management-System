@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Employee;
 use App\Models\StakeholderLocation;
 use App\Models\Boss;
+use App\Models\Substake;
 
 class LoginController extends Controller
 {
@@ -51,6 +52,13 @@ class LoginController extends Controller
             Auth::login($admin);
             $request->session()->put('admin_id', $admin->id);
             return redirect()->intended('/admin');
+        }
+        $substake = Substake::where('email', $credentials['email'])->first();
+        
+        if ($admin && Hash::check($credentials['password'], $substake->password)) {
+            Auth::login($substake);
+            $request->session()->put('sub_id', $substake->SubstakesID);
+            return redirect()->intended('/subs');
         }
 
     

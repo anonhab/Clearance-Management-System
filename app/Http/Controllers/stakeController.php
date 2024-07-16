@@ -10,6 +10,8 @@ use App\Models\Location;
 use App\Models\ClearanceFormApproval;
 use App\Models\Stakeholder;
 use App\Models\StakeholderLocation;
+use App\Models\Substake;
+use App\Models\SubstakeApproval;
 use Illuminate\Support\Facades\Hash;
 
 class stakeController extends Controller
@@ -20,18 +22,20 @@ class stakeController extends Controller
     {
         $stakeId = $request->session()->get('stakeholderlocation_id');
         $stake = StakeholderLocation::find($stakeId);
+        $substake = Substake::where('StakeholderLocationID', $stakeId)->get();
+        $substakeapproval = SubstakeApproval::where('StakeholderLocationID', $stakeId)->get();
         $hasrequest = ClearanceForm::where('hasRequest', 'true')->get();
         $clearanceApproval = ClearanceFormApproval::where('StakeholderLocationID', $stakeId)->get();
-        return view('stakeholders.stakeholders', compact('clearanceApproval', 'stake', 'hasrequest'));
+        return view('stakeholders.stakeholders', compact('clearanceApproval', 'stake', 'hasrequest', 'substake','substakeapproval'));
     }
     public function setEmployeeIdInSession($employeeId)
     {
         // Set the employee ID in the session
         session()->put('employee_id', $employeeId);
-        
+
         // Retrieve the employee ID from the session
         $employeeId = session()->get('employee_id');
-    
+
         // Fetch necessary data
         $locations = Location::all();
         $employees = Employee::findOrFail($employeeId);
@@ -42,7 +46,7 @@ class stakeController extends Controller
             ->get();
         $bossname = Boss::all();
         $clearanceApprovals = ClearanceFormApproval::whereIn('ClearanceFormID', $clearanceForms->pluck('ClearanceFormID'))->get();
-    
+
         // Return the view with the fetched data
         return view('stakeholdersprint', compact(
             'employees',
@@ -54,7 +58,7 @@ class stakeController extends Controller
             'bossname'
         ));
     }
-        public function home()
+    public function home()
     {
         $employees = Employee::all();
         return view('employees.clearance', compact('employees'));

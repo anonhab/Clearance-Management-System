@@ -7,15 +7,16 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class SubController extends Controller
+class SubstakeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $substakes = Substake::all();
-        return view('stakeholders.substake',compact('substakes'));
+        $subId = $request->session()->get('sub_id');
+        $substakes = Substake::findOrFail($subId);
+        return view('substake.substake',compact('substakes'));
     }
 
     /**

@@ -13,13 +13,37 @@ class SubstakeApprovalController extends Controller
     public function index()
     {
         $approvals = SubstakeApproval::all();
-        return response()->json($approvals);
+        return back();
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
+    {
+        foreach ($request->input('SubstakesID') as $index => $substakesID) {
+            // Fetch corresponding StakeholderLocationID
+            $stakeholderLocationID = $request->input('StakeholderLocationID')[$index];
+
+            // Create or update the SubstakeApproval entry
+            $clearanceFormApproval = SubstakeApproval::firstOrCreate([
+                'ClearanceFormID' => $request->input('ClearanceFormID'),
+                'StakeholderLocationID' => $stakeholderLocationID,
+                'SubstakesID' => $substakesID,
+            ], [
+                'ApprovalStatus' => $request->input('ApprovalStatus'),
+                'Comments' => $request->input('Comments', 'new review'), // Provide a default value if Comments is empty
+            ]);
+            if (!$clearanceFormApproval->wasRecentlyCreated) {
+                continue;
+            }
+        }
+
+        // Redirect or return a response as needed
+        return redirect()->route('substakeapprovals.index')->with('success', 'Approvals successfully submitted.');
+    }
+
+    public function store2(Request $request)
     {
         $request->validate([
             'SubstakesID' => 'required|integer',

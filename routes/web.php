@@ -19,6 +19,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\stakeController;
 use App\Http\Controllers\SubstakeApprovalController;
 use App\Http\Controllers\SubstakeController;
+use App\Http\Controllers\SubController;
 
 // Admin routes
 Route::middleware('admin')->group(function () {
@@ -74,7 +75,9 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 // Resource routes for Substake
 Route::resource('substakes', SubstakeController::class);
+Route::resource('subs', SubController::class);
+
 Route::get('/sub/image', [SubstakeController::class, 'showImage'])->name('sub.image');
 
 // Resource routes for SubstakeApproval
-Route::resource('substake-approvals', SubstakeApprovalController::class);
+Route::resource('substakeapprovals', SubstakeApprovalController::class);

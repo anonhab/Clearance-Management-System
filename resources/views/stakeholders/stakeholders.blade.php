@@ -97,7 +97,8 @@
                                 </a>
                             </td>
                             <td>
-                            <a href="{{ route('set-employee-id-in-session', $request->EmployeeID) }}/" class="btn btn-primary">View Request</a>                            </td>
+                                <a href="{{ route('set-employee-id-in-session', $request->EmployeeID) }}/" class="btn btn-primary">View Request</a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -108,8 +109,8 @@
                         @if(count($clearanceApproval) > 0)
                         <tr>
                             <th>ClearanceFormID</th>
-                            <th>ApprovalDate</th>
                             <th>RequestDate</th>
+                            <th>Substake status</th>
                             <th>ApprovalStatus</th>
                             <th>Comments</th>
                             <th>Actions</th>
@@ -119,17 +120,43 @@
                         @foreach($clearanceApproval as $cl)
                         <tr>
                             <td><a href="{{ route('clean_update.show', $cl->ClearanceFormID) }}">View</a></td>
-                            <td>{{$cl->updated_at}}</td>
                             <td>{{$cl->created_at}}</td>
+                            @php
+                            $cont = $substakeapproval->filter(function($item) {
+                            return $item->ApprovalStatus == "Approved";
+                            })->count();
+                            $cont1 = count($substakeapproval);
+                            @endphp
+
+                            @if ($cont1 == $cont && $cont1 > 0)
+                            <td  ><button class="btn btn-success btn-sm">Approved</button></td>
+                            @elseif ($cont1 == 0)
+                            <td  ><button class="btn btn-warning btn-sm">NOT SEND</button></td>
+                            @else
+    
+                            <td  ><button class="btn btn-warning btn-sm">Waiting</button></td>
+                            @endif
                             <td>{{$cl->ApprovalStatus}}</td>
-                            <td>{{$cl->Comments}}</td>
+                            <td>{{ $cl->Comments }}</td>
                             <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $cl->ApprovalID }}"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <form action="#" method="post">
-                                    @csrf
-                                    <input type="hidden" name="ClearanceFormID" value="{{ $cl->ClearanceFormID }}">
-                                    <button class="btn btn-warning btn-sm"><b>Send for Review</b></button>
+                                <form action="{{ route('substakeapprovals.store') }}" method="POST">
+                                    @csrf <!-- CSRF protection token -->
+                                    @foreach ($substake as $stake)
+                                    <input type="hidden" name="ClearanceFormID" value="{{ $cl->ClearanceFormID }}" class="form-control" readonly required>
+                                    <input type="hidden" name="ApprovalStatus" value="Pending">
+                                    <input type="hidden" name="SubstakesID[]" value="{{ $stake->SubstakesID }}">
+                                    <input type="hidden" name="StakeholderLocationID[]" value="{{ $stake->StakeholderLocationID }}">
+                                    @endforeach
+                                    @if(count($substakeapproval) == 0)
+                                    <button id="applyButton" type="submit" class="btn btn-success btn-sm">Send for Review</button>
+                                    @elseif ($cont1 == $cont && $cont1 > 0)
+                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $cl->ApprovalID }}"> <button id="applyButton" type="submit" class="btn btn-success">Update Review</button></a>
+                                    @else
+                                  
+                                    <button class="btn btn-warning btn-sm">Waiting</button>
+                                    @endif
                                 </form>
+
                             </td>
                         </tr>
                         @endforeach
