@@ -129,12 +129,12 @@
                             @endphp
 
                             @if ($cont1 == $cont && $cont1 > 0)
-                            <td  ><button class="btn btn-success btn-sm">Approved</button></td>
+                            <td><button class="btn btn-success btn-sm">Approved</button></td>
                             @elseif ($cont1 == 0)
-                            <td  ><button class="btn btn-warning btn-sm">NOT SEND</button></td>
+                            <td><button class="btn btn-warning btn-sm">NOT SEND</button></td>
                             @else
-    
-                            <td  ><button class="btn btn-warning btn-sm">Waiting</button></td>
+
+                            <td><button class="btn btn-warning btn-sm">Waiting</button></td>
                             @endif
                             <td>{{$cl->ApprovalStatus}}</td>
                             <td>{{ $cl->Comments }}</td>
@@ -152,7 +152,7 @@
                                     @elseif ($cont1 == $cont && $cont1 > 0)
                                     <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $cl->ApprovalID }}"> <button id="applyButton" type="submit" class="btn btn-success">Update Review</button></a>
                                     @else
-                                  
+
                                     <button class="btn btn-warning btn-sm">Waiting</button>
                                     @endif
                                 </form>
@@ -161,7 +161,11 @@
                         </tr>
                         @endforeach
                         @else
-                        <h3 style="background-color: rgba(11, 46, 83, 0.872);color:aliceblue; width:180px; " colspan="5">No data found</h3>
+                        <tr>
+                            <td style="background-color: rgb(146, 125, 125); color: aliceblue;" colspan="5">
+                                <i class="material-icons">info</i> No data found
+                            </td>
+                        </tr>
                         @endif
                     </tbody>
                 </table>

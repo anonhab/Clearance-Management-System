@@ -58,6 +58,7 @@ class LoginController extends Controller
         if ($substake && Hash::check($credentials['password'], $substake->password)) {
             Auth::login($substake);
             $request->session()->put('sub_id', $substake->SubstakesID);
+            $request->session()->put('stakeholder_id', $substake->StakeholderLocationID);
             return redirect()->intended('/subs');
         }
 

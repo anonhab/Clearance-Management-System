@@ -1,51 +1,53 @@
 @include('partials.header')
 <body>
 <nav class="sidebar close">
-  <header>
-    <div class="image-text">
-      <span class="image">
-      <img src="{{ route('boss.image') }}" alt="Employee Image">
-      </span>
-      <div class="text logo-text">
-        <span class="name">habtamu bitew</span>
-        <span class="profession">Substake {{ session('sub_id') }}</span>
+    <header>
+      <div class="image-text">
+        <span class="image">
+         
+        <img src="{{ route('sub.image') }}" alt="Employee Image">
+
+        </span>
+        <div class="text logo-text">
+          <span class="name">habtamu bitew</span>
+          <span class="profession">Sub Employee {{ session('boss_id') }}</span>
+        </div>
+      </div>
+      <i class='material-icons toggle'>chevron_right</i>
+    </header>
+    <div class="menu-bar">
+      <div class="menu">
+        <ul class="menu-links">
+          <li class="nav-link">
+            <a href="#">
+              <i class='material-icons icon'>home</i>
+              <span class="text nav-text">Home</span>
+            </a>
+          </li>
+          <li class="nav-link">
+            <a href="{{url('subprofile')}}">
+              <i class='material-icons icon'>account_circle</i>
+              <span class="text nav-text">My profile</span>
+            </a>
+          </li>
+          <li class="nav-link">
+            <a href="{{url('subs')}}">
+              <i class='material-icons icon'>assignment</i>
+              <span class="text nav-text">Requested Form</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="bottom-content">
+        <li class="">
+          <a href="{{url('/logout')}}">
+            <i class='material-icons icon'>logout</i>
+            <span class="text nav-text">Logout</span>
+          </a>
+        </li>
       </div>
     </div>
-    <i class='material-icons toggle'>chevron_right</i>
-  </header>
-  <div class="menu-bar">
-    <div class="menu">
-      <ul class="menu-links">
-        <li class="nav-link">
-          <a href="#">
-            <i class='material-icons icon'>home</i>
-            <span class="text nav-text">Home</span>
-          </a>
-        </li>
-        <li class="nav-link">
-          <a href="{{url('subprofile')}}">
-            <i class='material-icons icon'>account_circle</i>
-            <span class="text nav-text">My profile</span>
-          </a>
-        </li>
-        <li class="nav-link">
-          <a href="{{url('subs')}}">
-            <i class='material-icons icon'>assignment</i>
-            <span class="text nav-text">Requested Form</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="bottom-content">
-      <li class="">
-        <a href="{{url('/logout')}}">
-          <i class='material-icons icon'>logout</i>
-          <span class="text nav-text">Logout</span>
-        </a>
-      </li>
-    </div>
-  </div>
-</nav>
+  </nav>
 
 <section class="home">
     @if(session('success'))

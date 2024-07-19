@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StakeholderLocation;
 use App\Models\Substake;
 use App\Models\SubstakeApproval;
 use Illuminate\Database\QueryException;
@@ -77,27 +78,21 @@ public function  profile(Request $request)
 {
 
     $subid = $request->session()->get('sub_id');
-    $sub = Substake::findOrFail($subid);
-    return view('substake.profile', compact('sub'));
+    $sub = Substake::find($subid);
+    $stakeid = $request->session()->get('stakeholder_id');
+    $stake = StakeholderLocation::find($stakeid);
+    return view('substake.profile', compact('sub','stake'));
 }
 public function changePassword(Request $request)
 {
-    // $validator = Validator::make($request->all(), [
-    //     'current_password' => 'required',
-    //     'new_password' => 'required|min:8|confirmed',
-    // ]);
-
-    // if ($validator->fails()) {
-    //     return back()->withErrors($validator)->withInput()->with('modal', 'changePasswordModal');
-    // }
 
     $subid = $request->session()->get('sub_id');
     $sub = Substake::findOrFail($subid);
-    if (!Hash::check($request->current_password, $sub->Password)) {
+    if (!Hash::check($request->current_password, $sub->password)) {
         return back()->withErrors(['current_password' => 'Current password is incorrect'])->withInput();
     }
 
-    $sub->Password = Hash::make($request->new_password);
+    $sub->password = Hash::make($request->new_password);
     $sub->save();
 
     return back()->with('success', 'Password changed successfully');

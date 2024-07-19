@@ -86,7 +86,7 @@
         $count =0;
         $stakecount=0;
         @endphp
-        
+
         <table class="table table-striped table-hover table-bordered">
           <thead class="thead-dark">
             <tr>
@@ -96,15 +96,15 @@
             </tr>
           </thead>
           <tbody>
-
             @foreach ($stakeholderLocations as $stakeloc)
+            @if ($stakeloc->Priority !== 'HIGH')
             <tr>
               @php
               $stakeholder = $stakeholders->firstWhere('StakeholderID', $stakeloc->StakeholderID);
               $location = $locations->firstWhere('LocationID', $stakeloc->LocationID);
               $stakeholderName = $stakeholder ? $stakeholder->Workdep : '';
               $locationName = $location ? $location->LocationName : '';
-              $stakecount=$stakecount+1;
+              $stakecount++;
               @endphp
               <td>{{ $stakeholderName }}</td>
               <td>{{ $locationName }}</td>
@@ -116,9 +116,7 @@
                 @case('Approved')
                 <button class="btn btn-success btn-sm">
                   <span>{{ $cp->ApprovalStatus }}</span>
-                  @php
-                  $count = $count + 1;
-                  @endphp
+                  @php $count++ @endphp
                 </button>
                 @break
                 @case('Denied')
@@ -141,19 +139,21 @@
                 @endforeach
               </td>
             </tr>
+            @endif
             @endforeach
           </tbody>
+
         </table>
       </div>
       @if($count==$stakecount)
       @foreach($clearanceForms as $clear)
-        @if($clear->hasRequest=='true')
-        <div class="btn" class="text nav-text"><button class="btn btn-warning btn-sm"><b>Waiting for Review</b></button></div>
-        @else 
-        <div class="btn" class="text nav-text"><button class="btn btn-success btn-sm"> <a href="{{url('hasrequest')}}"> <b>Send for Review</b></a></button></div>
-       
-        @endif
-        @endforeach
+      @if($clear->hasRequest=='true')
+      <div class="btn" class="text nav-text"><button class="btn btn-warning btn-sm"><b>Waiting for Review</b></button></div>
+      @else
+      <div class="btn" class="text nav-text"><button class="btn btn-success btn-sm"> <a href="{{url('hasrequest')}}"> <b>Send for Review</b></a></button></div>
+
+      @endif
+      @endforeach
       @endif
       @if($count!=$stakecount)
       <div class="btn" class="text nav-text"><button class="btn btn-warning btn-sm"><b>Waiting for Generate Certificate </b></button></div>
@@ -177,19 +177,22 @@
           <div class="modal-body">
             <label for="clearanceFormID">APPLY FOR ALL Stakeholders</label>
             @foreach ($stakeholderLocations as $stakeloc)
+            @if ($stakeloc->Priority !== 'HIGH')
             <div class="form-group">
               <input type="hidden" id="clearanceFormID" name="ClearanceFormID" value="{{ $clearanceForm->ClearanceFormID }}" class="form-control" readonly required>
               <input type="hidden" name="ApprovalStatus" value="Pending">
+              <input type="hidden" name="StakeholderLocationID[]" value="{{ $stakeloc->StakeholderLocationID }}">
             </div>
-            <input type="hidden" name="StakeholderLocationID[]" value="{{ $stakeloc->StakeholderLocationID }}">
+            @endif
             @endforeach
           </div>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button id="applyButton" type="submit" class="btn btn-success">Applay for all</button>
+            <button id="applyButton" type="submit" class="btn btn-success">Apply for all</button>
           </div>
         </form>
+
       </div>
     </div>
   </div>

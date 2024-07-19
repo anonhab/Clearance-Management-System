@@ -73,7 +73,7 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout']);
 
-
+Route::post('sub_change-password', [SubController::class, 'changePassword'])->name('subchangepassword');
 // Resource routes for Substake
 Route::resource('substakes', SubstakeController::class);
 Route::resource('subs', SubController::class);

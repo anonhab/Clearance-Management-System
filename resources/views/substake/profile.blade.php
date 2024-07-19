@@ -6,12 +6,12 @@
       <div class="image-text">
         <span class="image">
          
-        <img src="{{ route('boss.image') }}" alt="Employee Image">
+        <img src="{{ route('sub.image') }}" alt="Employee Image">
 
         </span>
         <div class="text logo-text">
           <span class="name">habtamu bitew</span>
-          <span class="profession">BOSS {{ session('boss_id') }}</span>
+          <span class="profession">Sub Employee {{ session('boss_id') }}</span>
         </div>
       </div>
       <i class='material-icons toggle'>chevron_right</i>
@@ -26,13 +26,13 @@
             </a>
           </li>
           <li class="nav-link">
-            <a href="{{url('bossprofile')}}">
+            <a href="{{url('subprofile')}}">
               <i class='material-icons icon'>account_circle</i>
               <span class="text nav-text">My profile</span>
             </a>
           </li>
           <li class="nav-link">
-            <a href="{{url('boss')}}">
+            <a href="{{url('subs')}}">
               <i class='material-icons icon'>assignment</i>
               <span class="text nav-text">Requested Form</span>
             </a>
@@ -67,18 +67,20 @@
         </div>
         @endif
         <div class="center">
-          <img src="{{ route('boss.image') }}" class="pimg" alt="Employee Image">
+          <img src="{{ route('sub.image') }}" class="pimg" alt="Employee Image">
         </div>
         <div class="profile-info">
 
-          <h3>Name:</h3>
-          <div class="value">{{ $boss->Full_name }}</div>
+          <h3>ID:</h3>
+          <div class="value">{{ $sub->SubstakesID }}</div>
 
-          <h3>Responsibility:</h3>
-          <div class="value">{{ $boss->Responsibility }}</div>
+          <h3>Full Name:</h3>
+          <div class="value">{{ $sub->FullName }}</div>
 
+          <h3>Work Department:</h3>
+          <div class="value">{{ $sub->Workdep }}</div>
           <h3>Email:</h3>
-          <div class="value">{{ $boss->Email }}</div>
+          <div class="value">{{ $sub->email }}</div>
 
           <h3>Password:</h3>
           <div class="value">*******</div>
@@ -94,7 +96,7 @@
   <div id="changePasswordModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form action="{{ route('bosschangepassword') }}" method="POST">
+        <form action="{{ route('subchangepassword') }}" method="POST">
           @csrf <!-- CSRF protection -->
           <div class="modal-header">
             <h4 class="modal-title">Change Password</h4>

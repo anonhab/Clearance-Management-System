@@ -78,51 +78,51 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($stakeholderLocations as $stakeloc)
-                    <tr>
-                        @php
-                        $stakeholder = $stakeholders->firstWhere('StakeholderID', $stakeloc->StakeholderID);
-                        $location = $locations->firstWhere('LocationID', $stakeloc->LocationID);
-                        $stakeholderName = $stakeholder ? $stakeholder->Workdep : '';
-                        $locationName = $location ? $location->LocationName : '';
-                        @endphp
-                        <td>{{ $stakeholderName }}</td>
-                        <td>{{ $locationName }}</td>
-                        <td>
-                            @foreach ($clearanceForms as $clearanceForm)
-                            @foreach ($clearanceApprovals as $cp)
-                            @if ($cp->StakeholderLocationID == $stakeloc->StakeholderLocationID && $cp->ClearanceFormID == $clearanceForm->ClearanceFormID)
-                            @switch($cp->ApprovalStatus)
-                            @case('Approved')
-                            <p class="btn btn-success btn-sm">
-                                <span>{{ $cp->ApprovalStatus }}</span>
-                                @php
+  @foreach ($stakeholderLocations as $stakeloc)
+    @if ($stakeloc->Priority !== 'HIGH')
+      <tr>
+        @php
+          $stakeholder = $stakeholders->firstWhere('StakeholderID', $stakeloc->StakeholderID);
+          $location = $locations->firstWhere('LocationID', $stakeloc->LocationID);
+          $stakeholderName = $stakeholder ? $stakeholder->Workdep : '';
+          $locationName = $location ? $location->LocationName : '';
+        @endphp
+        <td>{{ $stakeholderName }}</td>
+        <td>{{ $locationName }}</td>
+        <td>
+          @foreach ($clearanceForms as $clearanceForm)
+            @foreach ($clearanceApprovals as $cp)
+              @if ($cp->StakeholderLocationID == $stakeloc->StakeholderLocationID && $cp->ClearanceFormID == $clearanceForm->ClearanceFormID)
+                @switch($cp->ApprovalStatus)
+                  @case('Approved')
+                    <p class="btn btn-success btn-sm">
+                      <span>{{ $cp->ApprovalStatus }}</span>
+                    </p>
+                    @break
+                  @case('Denied')
+                    <p class="btn btn-danger btn-sm">
+                      <span>{{ $cp->ApprovalStatus }}</span>
+                    </p>
+                    @break
+                  @case('Pending')
+                    <p class="btn btn-warning btn-sm">
+                      <span>{{ $cp->ApprovalStatus }}</span>
+                    </p>
+                    @break
+                  @default
+                    <p class="btn btn-secondary btn-sm">
+                      <span>{{ $cp->ApprovalStatus }}</span>
+                    </p>
+                @endswitch
+              @endif
+            @endforeach
+          @endforeach
+        </td>
+      </tr>
+    @endif
+  @endforeach
+</tbody>
 
-                                @endphp
-                            </p>
-                            @break
-                            @case('Denied')
-                            <p class="btn btn-danger btn-sm">
-                                <span>{{ $cp->ApprovalStatus }}</span>
-                            </p>
-                            @break
-                            @case('Pending')
-                            <p class="btn btn-warning btn-sm">
-                                <span>{{ $cp->ApprovalStatus }}</span>
-                            </p>
-                            @break
-                            @default
-                            <p class="btn btn-secondary btn-sm">
-                                <span>{{ $cp->ApprovalStatus }}</span>
-                            </p>
-                            @endswitch
-                            @endif
-                            @endforeach
-                            @endforeach
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
             </table>
         </div>
         <div class="inv-footer">
