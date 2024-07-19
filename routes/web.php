@@ -73,9 +73,11 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout']);
 
+
 // Resource routes for Substake
 Route::resource('substakes', SubstakeController::class);
 Route::resource('subs', SubController::class);
+Route::get('/subprofile', [SubController::class, 'profile']);
 
 Route::get('/sub/image', [SubstakeController::class, 'showImage'])->name('sub.image');
 

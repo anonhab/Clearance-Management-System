@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Substake;
+use App\Models\SubstakeApproval;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class SubstakeController extends Controller
+class SubController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,9 @@ class SubstakeController extends Controller
     public function index(Request $request)
     {
         $subId = $request->session()->get('sub_id');
+        $subapproval = SubstakeApproval::where('SubstakesID', $subId)->get();
         $substakes = Substake::findOrFail($subId);
-        return view('substake.substake',compact('substakes'));
+        return view('substake.substake',compact('substakes','subapproval'));
     }
 
     /**
@@ -71,6 +73,52 @@ class SubstakeController extends Controller
     // If no image is found in any substake
     abort(404, 'No image found for any substake.');
 }
+public function  profile(Request $request)
+{
+
+    $subid = $request->session()->get('sub_id');
+    $sub = Substake::findOrFail($subid);
+    return view('substake.profile', compact('sub'));
+}
+public function changePassword(Request $request)
+{
+    // $validator = Validator::make($request->all(), [
+    //     'current_password' => 'required',
+    //     'new_password' => 'required|min:8|confirmed',
+    // ]);
+
+    // if ($validator->fails()) {
+    //     return back()->withErrors($validator)->withInput()->with('modal', 'changePasswordModal');
+    // }
+
+    $subid = $request->session()->get('sub_id');
+    $sub = Substake::findOrFail($subid);
+    if (!Hash::check($request->current_password, $sub->Password)) {
+        return back()->withErrors(['current_password' => 'Current password is incorrect'])->withInput();
+    }
+
+    $sub->Password = Hash::make($request->new_password);
+    $sub->save();
+
+    return back()->with('success', 'Password changed successfully');
+}
+public function bossshowImage(Request $request)
+{
+    $subid = $request->session()->get('sub_id');
+    $sub = Substake::findOrFail($subid);
+
+    if (!$sub) {
+        abort(404, 'Employee not found in session.');
+    }
+
+
+
+    if (!$sub || !$sub->image) {
+        abort(404, 'Image not found.');
+    }
+
+    return response($sub->image)->header('Content-Type', 'image/jpeg');
+}
 
 
 
@@ -79,19 +127,22 @@ class SubstakeController extends Controller
      */
     public function show(Request $request)
     {
-        $substake = new Substake();
+        $subid = $request->session()->get('sub_id');
+        $sub = Substake::findOrFail($subid);
+    
 
-        if (!$substake) {
+        if (!$sub) {
             abort(404, 'Employee not found in session.');
         }
 
-        $substake = Substake::all();
+        $subid = $request->session()->get('sub_id');
+        $sub = Substake::findOrFail($subid);
 
-        if (!$substake || !$substake->image) {
+        if (!$subid || !$subid->image) {
             abort(404, 'Image not found.');
         }
 
-        return response($substake->image)->header('Content-Type', 'image/jpeg');
+        return response($subid->image)->header('Content-Type', 'image/jpeg');
     }
 
     /**
@@ -99,34 +150,23 @@ class SubstakeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $substake = Substake::find($id);
-        if (!$substake) {
-            return redirect()->back()->with('error', 'Substake not found.')->withInput();
+        $clearanceForm = SubstakeApproval::find($id);
+    
+        if (!$clearanceForm) {
+            return redirect()->back()->with('error', 'Clearance Form not found');
         }
-        try {
-            $substake->SubstakesID = $request->input('SubstakesID');
-            $substake->StakeholderLocationID = $request->input('StakeholderLocationID');
-            $substake->FullName = $request->input('FullName');
-            $substake->Workdep = $request->input('Workdep');
-            $substake->email = $request->input('email');
-
-            if ($request->input('password')) {
-                $substake->password = Hash::make($request->input('password'));
-            }
     
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageData = file_get_contents($image);
-                $substake->image = $imageData;
-            }
-    
-            $substake->save();
-    
-            return redirect()->route('substakes.index')->with('success', 'Substake updated successfully');
-        } catch (QueryException $e) {
-            // Handle other possible exceptions
-            return redirect()->back()->with('error', 'An unexpected error occurred.')->withInput();
+        if (!$request->has('Status')) {
+            return redirect()->back()->with('error', 'Status input is required');
         }
+    
+        $clearanceForm->ApprovalStatus = $request->input('Status');
+    
+        if (!$clearanceForm->save()) {
+            return redirect()->back()->with('error', 'Failed to update Clearance Form');
+        }
+    
+        return redirect()->back()->with('success', 'Submitted successfully');
     }
     public function destroy($id)
     {

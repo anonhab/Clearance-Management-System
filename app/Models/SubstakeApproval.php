@@ -13,7 +13,7 @@ class SubstakeApproval extends Model
     protected $table = 'substakesapproval';
 
     // The primary key for the table
-    protected $primaryKey = 'SubstakesID';
+    protected $primaryKey = 'ApprovalID';
 
     // The attributes that are mass assignable
     protected $fillable = [

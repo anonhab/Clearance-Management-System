@@ -54,21 +54,20 @@ class LoginController extends Controller
             return redirect()->intended('/admin');
         }
         $substake = Substake::where('email', $credentials['email'])->first();
-        
-        if ($admin && Hash::check($credentials['password'], $substake->password)) {
+
+        if ($substake && Hash::check($credentials['password'], $substake->password)) {
             Auth::login($substake);
             $request->session()->put('sub_id', $substake->SubstakesID);
             return redirect()->intended('/subs');
         }
 
-    
         return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
-        $request->session()->forget(['employee_id', 'boss_id', 'stakeholder_id', 'stakeholderlocation_id','admin_id']);
+        $request->session()->forget(['employee_id', 'boss_id', 'stakeholder_id', 'sub_id','stakeholderlocation_id','admin_id']);
         return redirect()->route('login');
     }
 }

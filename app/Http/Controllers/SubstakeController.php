@@ -7,7 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class SubController extends Controller
+class SubstakeController extends Controller
 {
     /**
      * Display a listing of the resource.
