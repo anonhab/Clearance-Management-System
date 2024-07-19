@@ -149,7 +149,14 @@
       @foreach($clearanceForms as $clear)
       @if($clear->hasRequest=='true')
       <div class="btn" class="text nav-text"><button class="btn btn-warning btn-sm"><b>Waiting for Review</b></button></div>
-      @else
+      @elseif($clear->hasRequest=='Approved')
+<div class="nav-text">
+  <button class="btn btn-success btn-sm">
+    <a href="#">
+      <b>Congrats, you can leave now and get certificate!</b>
+    </a>
+  </button>
+</div>      @else
       <div class="btn" class="text nav-text"><button class="btn btn-success btn-sm"> <a href="{{url('hasrequest')}}"> <b>Send for Review</b></a></button></div>
 
       @endif

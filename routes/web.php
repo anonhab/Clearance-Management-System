@@ -61,6 +61,7 @@ Route::middleware('stake')->group(function () {
     Route::post('stake_change-password', [stakeController::class, 'changePassword'])->name('stakechangepassword');
     Route::get('/stake/image', [stakeController::class, 'stakeshowImage'])->name('stake.image');
 });
+Route::get('/approverequest', [stakeController::class, 'approveRequest']);
 Route::get('/set-employee-id-in-session/{employeeId}', [stakeController::class, 'setEmployeeIdInSession'])->name('set-employee-id-in-session');
 Route::resource('employees', EmployeeController::class)->only(['index', 'show']);
 Route::resource('clean_update', CleanUpdateController::class);

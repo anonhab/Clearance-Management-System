@@ -121,6 +121,8 @@
       </tr>
     @endif
   @endforeach
+  <div class="btn" class="text nav-text"><button class="btn btn-success btn-sm"> <a href="{{url('approverequest')}}"> <b>MAKE FINAL APPROVE</b></a></button></div>
+      
 </tbody>
 
             </table>

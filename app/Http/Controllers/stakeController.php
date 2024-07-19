@@ -58,6 +58,18 @@ class stakeController extends Controller
             'bossname'
         ));
     }
+    public function approveRequest(Request $request)
+    {
+        $employeeId = $request->session()->get('employee_id');
+        $clearanceForm = ClearanceForm::where('EmployeeID', $employeeId)->first();
+    
+        if ($clearanceForm) {
+            $clearanceForm->hasRequest = "Approved";
+            $clearanceForm->save();
+        }
+    
+        return redirect()->route('stake.index');
+    }
     public function home()
     {
         $employees = Employee::all();

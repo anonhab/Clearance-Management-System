@@ -42,7 +42,9 @@ class empController extends Controller
         }
     
         return redirect()->back();
+        
     }
+    
     public function  profile(Request $request)
     {
 
