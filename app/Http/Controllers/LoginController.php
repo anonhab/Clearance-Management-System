@@ -64,6 +64,11 @@ class LoginController extends Controller
 
         return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
     }
+    public function homepage(Request $request)
+    {
+        
+        return view('index');
+    }
 
     public function logout(Request $request)
     {

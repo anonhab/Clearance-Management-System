@@ -75,11 +75,22 @@
             <div class="col-sm-6">
               <h2><b>Clearance Status</b></h2>
             </div>
+            @foreach($clearanceForms as $clear)
+            @if($clear->hasRequest=='Approved')
+            <div class="col-sm-6 text-right">
+             
+              <button  class="btn btn-success" >
+                 No need to Apply
+              </button>
+            </div>
+            @else
             <div class="col-sm-6 text-right">
               <button id="applyButton" class="btn btn-success" data-toggle="modal" data-target="#addEmployeeModal">
                 <i class="material-icons">&#xE147;</i> Apply
               </button>
-            </div>
+            </div> 
+            @endif
+            @endforeach
           </div>
         </div>
         @php
@@ -152,7 +163,7 @@
       @elseif($clear->hasRequest=='Approved')
 <div class="nav-text">
   <button class="btn btn-success btn-sm">
-    <a href="#">
+    <a href="{{url('print')}}">
       <b>Congrats, you can leave now and get certificate!</b>
     </a>
   </button>
