@@ -19,7 +19,7 @@
             <div class="menu">
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="{{url('/')}}">
                             <i class='material-icons icon'>home</i>
                             <span class="text nav-text">Home</span>
                         </a>

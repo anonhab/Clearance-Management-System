@@ -15,12 +15,19 @@
   <div class="menu-bar">
     <div class="menu">
       <ul class="menu-links">
+      <li class="nav-link">
+          <a href="{{url('/')}}">
+          <i class='material-icons icon'>home</i>
+          <span class="text nav-text">Home</span>
+          </a>
+        </li>
         <li class="nav-link">
           <a href="{{url('dashboard')}}">
             <i class='material-icons icon'>dashboard</i>
             <span class="text nav-text">Dashboard</span>
           </a>
         </li>
+        
         <li class="nav-link">
           <a href="#">
             <i class='material-icons icon'>account_circle</i>
@@ -55,12 +62,6 @@
           <a href="{{url('stakeholderLocations')}}">
             <i class='material-icons icon'>place</i>
             <span class="text nav-text">Stake Locations</span>
-          </a>
-        </li>
-        <li class="nav-link">
-          <a href="#">
-            <i class='material-icons icon'>map</i>
-            <span class="text nav-text">Employee Locations</span>
           </a>
         </li>
       </ul>

@@ -11,9 +11,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +49,11 @@
 
     </div>
   </header>
-
+  @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
   <main class="main">
 
     <!-- Hero Section -->
@@ -66,7 +68,7 @@
               <a href="{{url('login')}}" class="btn-get-started">Sign in</a>
             </div>
           </div>
-          <div class="col-lg-6 order-1 "   >
+          <div class="col-lg-6 order-1 ">
             <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
           </div>
         </div>
@@ -84,81 +86,81 @@
         <h2>About Us</h2>
       </div><!-- End Section Title -->
 
-     <div class="container">
-    <div class="row gy-4">
-      <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-        <p>
-          Welcome to our Clearance Management System, where efficiency meets clarity. Our mission is to simplify your processes.
-        </p>
-        <ul>
-          <li><i class="bi bi-check2-circle"></i> <span>Seamless integration for improved workflow.</span></li>
-          <li><i class="bi bi-check2-circle"></i> <span>User-friendly interface for better productivity.</span></li>
-          <li><i class="bi bi-check2-circle"></i> <span>Reliable support and service excellence.</span></li>
-        </ul>
-      </div>
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+            <p>
+              Welcome to our Clearance Management System, where efficiency meets clarity. Our mission is to simplify your processes.
+            </p>
+            <ul>
+              <li><i class="bi bi-check2-circle"></i> <span>Seamless integration for improved workflow.</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>User-friendly interface for better productivity.</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>Reliable support and service excellence.</span></li>
+            </ul>
+          </div>
 
-      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-        <p>
-          We are dedicated to providing exceptional solutions tailored to your needs. Our team ensures that every interaction is smooth and effective, enhancing your experience.
-        </p>
-        <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <p>
+              We are dedicated to providing exceptional solutions tailored to your needs. Our team ensures that every interaction is smooth and effective, enhancing your experience.
+            </p>
+            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
     </section><!-- /About Section -->
 
     <!-- Why Us Section -->
-<section id="why-us" class="section why-us light-background">
+    <section id="why-us" class="section why-us light-background">
 
-  <div class="container-fluid">
-    <div class="row gy-4">
+      <div class="container-fluid">
+        <div class="row gy-4">
 
-      <div class="col-lg-7 d-flex flex-column justify-content-center order-2 order-lg-1">
+          <div class="col-lg-7 d-flex flex-column justify-content-center order-2 order-lg-1">
 
-        <div class="content px-xl-5" data-aos="fade-up" data-aos-delay="100">
-          <h3><span>Why Choose Our Clearance System?</span><strong> - Efficiency and Clarity</strong></h3>
-          <p>
-            Our system streamlines clearance processes, ensuring smooth operations and transparent communication at every step.
-          </p>
+            <div class="content px-xl-5" data-aos="fade-up" data-aos-delay="100">
+              <h3><span>Why Choose Our Clearance System?</span><strong> - Efficiency and Clarity</strong></h3>
+              <p>
+                Our system streamlines clearance processes, ensuring smooth operations and transparent communication at every step.
+              </p>
+            </div>
+
+            <div class="faq-container px-xl-5" data-aos="fade-up" data-aos-delay="200">
+
+              <div class="faq-item faq-active">
+                <h3><span>01</span> How does our system enhance workflow?</h3>
+                <div class="faq-content">
+                  <p>Our platform integrates seamlessly, reducing bottlenecks and improving overall productivity.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3><span>02</span> What makes our system reliable?</h3>
+                <div class="faq-content">
+                  <p>We ensure robust performance with regular updates and dedicated support to maintain optimal functionality.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3><span>03</span> Why trust our expertise?</h3>
+                <div class="faq-content">
+                  <p>Our team combines years of experience with a commitment to innovation, delivering top-tier solutions tailored to your needs.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-5 order-1 order-lg-2 why-us-img">
+            <img src="assets/img/why-us.png" class="img-fluid" alt="Why Choose Our Clearance System" data-aos="zoom-in" data-aos-delay="100">
+          </div>
         </div>
-
-        <div class="faq-container px-xl-5" data-aos="fade-up" data-aos-delay="200">
-
-          <div class="faq-item faq-active">
-            <h3><span>01</span> How does our system enhance workflow?</h3>
-            <div class="faq-content">
-              <p>Our platform integrates seamlessly, reducing bottlenecks and improving overall productivity.</p>
-            </div>
-            <i class="faq-toggle bi bi-chevron-right"></i>
-          </div><!-- End Faq item-->
-
-          <div class="faq-item">
-            <h3><span>02</span> What makes our system reliable?</h3>
-            <div class="faq-content">
-              <p>We ensure robust performance with regular updates and dedicated support to maintain optimal functionality.</p>
-            </div>
-            <i class="faq-toggle bi bi-chevron-right"></i>
-          </div><!-- End Faq item-->
-
-          <div class="faq-item">
-            <h3><span>03</span> Why trust our expertise?</h3>
-            <div class="faq-content">
-              <p>Our team combines years of experience with a commitment to innovation, delivering top-tier solutions tailored to your needs.</p>
-            </div>
-            <i class="faq-toggle bi bi-chevron-right"></i>
-          </div><!-- End Faq item-->
-
-        </div>
-
       </div>
 
-      <div class="col-lg-5 order-1 order-lg-2 why-us-img">
-        <img src="assets/img/why-us.png" class="img-fluid" alt="Why Choose Our Clearance System" data-aos="zoom-in" data-aos-delay="100">
-      </div>
-    </div>
-  </div>
-
-</section><!-- /Why Us Section -->
+    </section><!-- /Why Us Section -->
 
 
     <!-- Contact Section -->
@@ -204,10 +206,9 @@
           </div>
 
           <div class="col-lg-7">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
-              data-aos-delay="200">
+            <form action="{{ route('contact.store') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              @csrf
               <div class="row gy-4">
-
                 <div class="col-md-6">
                   <label for="name-field" class="pb-2">Your Name</label>
                   <input type="text" name="name" id="name-field" class="form-control" required="">
@@ -235,7 +236,6 @@
 
                   <button type="submit">Send Message</button>
                 </div>
-
               </div>
             </form>
           </div><!-- End Contact Form -->
@@ -296,8 +296,7 @@
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
   <div id="preloader"></div>
@@ -307,7 +306,7 @@
 
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-   
+
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>

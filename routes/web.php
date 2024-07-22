@@ -12,6 +12,7 @@ use App\Http\Controllers\StakeholderController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ClearanceFormController;
 use App\Http\Controllers\ClearanceFormApprovalController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EmployeeLocationController;
 use App\Http\Controllers\StakeholderLocationController;
 use App\Http\Controllers\empController;
@@ -79,6 +80,7 @@ Route::post('sub_change-password', [SubController::class, 'changePassword'])->na
 Route::resource('substakes', SubstakeController::class);
 Route::resource('subs', SubController::class);
 Route::get('/subprofile', [SubController::class, 'profile']);
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/sub/image', [SubstakeController::class, 'showImage'])->name('sub.image');
 
