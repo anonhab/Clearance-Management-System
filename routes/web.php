@@ -71,7 +71,7 @@ Route::resource('clearanceForms', ClearanceFormController::class);
 Route::resource('cleanapp_update', cleanappController::class);
 // Authentication routes
 Route::get('/login', [LoginController::class, 'showLoginForm']);
-Route::get('/', [LoginController::class, 'homepage']);
+Route::get('/', [LoginController::class, 'homepage'])->name('index');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout']);
 

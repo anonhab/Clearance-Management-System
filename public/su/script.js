@@ -1,4 +1,4 @@
-window.onload = function() {
+ 
   const body = document.querySelector("body"),
     sidebar = body.querySelector("nav"),
     toggle = body.querySelector(".toggle"),
@@ -17,4 +17,3 @@ window.onload = function() {
     sidebar.classList.remove("close");
   });
 
-}

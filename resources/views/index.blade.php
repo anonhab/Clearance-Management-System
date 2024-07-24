@@ -29,12 +29,26 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
+      <a href="#" class="logo d-flex align-items-center me-auto">
+         <img src="assets/img/hero-img.png" alt="">
         <h1 class="sitename">CLMS</h1>
       </a>
+      @if(session('success'))
+      <div class="alert alert-success" id="success-alert">
+        {{ session('success') }}
+      </div>
 
+      <script>
+        setTimeout(function() {
+          const alert = document.getElementById('success-alert');
+          if (alert) {
+            alert.style.transition = 'opacity 1s ease';
+            alert.style.opacity = '0';
+            setTimeout(() => alert.style.display = 'none', 1000);
+          }
+        }, 3000); // 3000 milliseconds = 3 seconds
+      </script>
+      @endif
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
@@ -49,11 +63,7 @@
 
     </div>
   </header>
-  @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+
   <main class="main">
 
     <!-- Hero Section -->
@@ -103,7 +113,6 @@
             <p>
               We are dedicated to providing exceptional solutions tailored to your needs. Our team ensures that every interaction is smooth and effective, enhancing your experience.
             </p>
-            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -262,26 +271,7 @@
             <p><strong>Email:</strong> <span>info@example.com</span></p>
           </div>
         </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-4 col-md-12">
-          <h4>Follow Us</h4>
-          <div class="social-links d-flex">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
+ 
 
       </div>
     </div>

@@ -17,8 +17,9 @@ class SubController extends Controller
     public function index(Request $request)
     {
         $subId = $request->session()->get('sub_id');
-        $subapproval = SubstakeApproval::where('SubstakesID', $subId)->get();
-        $substakes = Substake::findOrFail($subId);
+        $subapproval = SubstakeApproval::where('SubstakesID', $subId)
+        ->where('ApprovalStatus', 'Pending')
+        ->get();                    $substakes = Substake::findOrFail($subId);
         return view('substake.substake',compact('substakes','subapproval'));
     }
 

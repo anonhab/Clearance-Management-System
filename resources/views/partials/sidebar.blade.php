@@ -29,9 +29,9 @@
         </li>
         
         <li class="nav-link">
-          <a href="#">
+          <a href="{{url('admin')}}">
             <i class='material-icons icon'>account_circle</i>
-            <span class="text nav-text">My profile</span>
+            <span class="text nav-text">Admin</span>
           </a>
         </li>
         <li class="nav-link">

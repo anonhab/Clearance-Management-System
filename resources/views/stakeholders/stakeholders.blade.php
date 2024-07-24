@@ -73,6 +73,8 @@
                     </div>
                 </div>
                 @if ($stake->Priority=='HIGH')
+                @if (count($hasrequest)>0)
+
                 <table class="table table-striped table-hover">
                     <thead>
 
@@ -103,6 +105,13 @@
                         @endforeach
                     </tbody>
                 </table>
+                @else
+                <tr>
+                    <td style="background-color: rgb(146, 125, 125); color: aliceblue;" colspan="5">
+                        <i class="material-icons">info</i> No data found
+                    </td>
+                </tr>
+                @endif
                 @else
                 <table class="table table-striped table-hover">
                     <thead>
