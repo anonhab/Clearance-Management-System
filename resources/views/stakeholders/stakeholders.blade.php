@@ -136,15 +136,16 @@
                             })->count();
                             $cont1 = count($substakeapproval);
                             @endphp
-
-                            @if ($cont1 == $cont && $cont1 > 0)
-                            <td><button class="btn btn-success btn-sm">Approved</button></td>
-                            @elseif ($cont1 == 0)
-                            <td><button class="btn btn-warning btn-sm">NOT SEND</button></td>
-                            @else
-
-                            <td><button class="btn btn-warning btn-sm">Waiting</button></td>
-                            @endif
+                            @php
+                            $approvalStatus = '';
+                            foreach ($substakeapproval as $sp) {
+                            if ($sp->ClearanceFormID == $cl->ClearanceFormID) {
+                            $approvalStatus = $sp->ApprovalStatus;
+                            break;
+                            }
+                            }
+                            @endphp
+                            <td>{{ $approvalStatus }}</td>
                             <td>{{$cl->ApprovalStatus}}</td>
                             <td>{{ $cl->Comments }}</td>
                             <td>
@@ -156,9 +157,9 @@
                                     <input type="hidden" name="SubstakesID[]" value="{{ $stake->SubstakesID }}">
                                     <input type="hidden" name="StakeholderLocationID[]" value="{{ $stake->StakeholderLocationID }}">
                                     @endforeach
-                                    @if(count($substakeapproval) == 0)
-                                    <button id="applyButton" type="submit" class="btn btn-success btn-sm">Send for Review</button>
-                                    @elseif ($cont1 == $cont && $cont1 > 0)
+                                    @if($approvalStatus == null)
+                                    <button id="applyButton" type="submit" class="btn btn-warning btn-sm">Send for Review</button>
+                                    @elseif ($approvalStatus == 'Approved')
                                     <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $cl->ApprovalID }}"> <button id="applyButton" type="submit" class="btn btn-success">Update Review</button></a>
                                     @else
 

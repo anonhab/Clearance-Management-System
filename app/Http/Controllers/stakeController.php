@@ -25,8 +25,9 @@ class stakeController extends Controller
         $substake = Substake::where('StakeholderLocationID', $stakeId)->get();
         $substakeapproval = SubstakeApproval::where('StakeholderLocationID', $stakeId)->get();
         $hasrequest = ClearanceForm::where('hasRequest', 'true')->get();
-        $clearanceApproval = ClearanceFormApproval::where('StakeholderLocationID', $stakeId)->get();
-        return view('stakeholders.stakeholders', compact('clearanceApproval', 'stake', 'hasrequest', 'substake','substakeapproval'));
+        $clearanceApproval = ClearanceFormApproval::where('StakeholderLocationID', $stakeId)
+        ->where('ApprovalStatus', 'Pending')->get();
+        return view('stakeholders.stakeholders', compact('clearanceApproval', 'stake', 'hasrequest', 'substake', 'substakeapproval'));
     }
     public function setEmployeeIdInSession($employeeId)
     {
@@ -62,12 +63,12 @@ class stakeController extends Controller
     {
         $employeeId = $request->session()->get('employee_id');
         $clearanceForm = ClearanceForm::where('EmployeeID', $employeeId)->first();
-    
+
         if ($clearanceForm) {
             $clearanceForm->hasRequest = "Approved";
             $clearanceForm->save();
         }
-    
+
         return redirect()->route('stake.index');
     }
     public function home()

@@ -128,36 +128,54 @@
           </div>
         </div>
         <table class="table table-striped table-hover">
-          @if(count($clearanceForm) > 0)
-          <thead>
+    @if(count($clearanceForm) > 0)
+        <thead>
+            @foreach ($clearanceForm as $cl)
+                @if($cl->Status == 'Approved')
+                    <tr>
+                        <th colspan="5">Your boss approves your requests 👍. See the clearance page, please 📄.</th>
+                    </tr>
+                    @break
+                @endif
+            @endforeach
+            @foreach ($clearanceForm as $cl)
+            @if($cl->Status != 'Approved')
             <tr>
-              <th>BossID</th>
-              <th>Reason for Departure</th>
-              <th>Request Date</th>
-              <th>Status</th>
-              <th>Actions</th>
+                <th>BossID</th>
+                <th>Reason for Departure</th>
+                <th>Request Date</th>
+                <th>Status</th>
+                <th>Actions</th>
             </tr>
-          </thead>
-          <tbody>
-           
-              @foreach($clearanceForm as $cl)
-                <tr>
-                  <td>{{$cl->BossID}}</td>
-                  <td>{{$cl->Leaving_case}}</td>
-                  <td>{{$cl->created_at}}</td>
-                  <td>{{$cl->Status}}</td>
-                  <td>
-                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" data-id="{{$cl->ClearanceFormID}}"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                  </td>
-                </tr>
-              @endforeach
-            @else
-              <tr>
-                <td style="background-color: rgb(146, 125, 125);color:aliceblue;" colspan="5">No data found Request New</td>
-              </tr>
             @endif
-          </tbody>
-        </table>
+            @endforeach
+        </thead>
+        <tbody>
+            @foreach ($clearanceForm as $cl)
+                @if($cl->Status != 'Approved')
+                    <tr>
+                        <td>{{ $cl->BossID }}</td>
+                        <td>{{ $cl->Leaving_case }}</td>
+                        <td>{{ $cl->created_at }}</td>
+                        <td>{{ $cl->Status }}</td>
+                        <td>
+                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" data-id="{{ $cl->ClearanceFormID }}">
+                                <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                            </a>
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
+        </tbody>
+    @else
+        <tbody>
+            <tr>
+                <td style="background-color: rgb(146, 125, 125); color: aliceblue;" colspan="5">No data found. Request New</td>
+            </tr>
+        </tbody>
+    @endif
+</table>
+
       </div>
     </div>
   </section>

@@ -15,9 +15,9 @@ class bossmanController extends Controller
     public function index(Request $request)
     {
         $bossId = $request->session()->get('boss_id');
-        // $employees = Employee::all();
+        // $employees = Employee::all()
         // $bosses=Boss::all();
-        $clearanceForm = ClearanceForm::where('BossID', $bossId)->get();
+        $clearanceForm = ClearanceForm::where('BossID', $bossId)->where('Status','Pending')->get();
         return view('bosses.boss', compact('clearanceForm'));
     }
     public function home()
